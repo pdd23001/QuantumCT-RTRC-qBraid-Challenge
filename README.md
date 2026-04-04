@@ -1,131 +1,75 @@
 # Quantum Courier Challenge
 
-Hybrid CVRP solver for the qBraid / Qiskit hackathon benchmark. The pipeline is:
+**Sponsors:** RTX Technology Research Center (RTRC), QuantumCT, and qBraid  
+**Event:** Yale Hackathon 2026
 
-1. Classical sweep decomposition to assign customers to vehicles.
-2. Cluster-local position-based QUBO for each vehicle.
-3. QAOA to optimize visit order inside each cluster.
-4. Feasibility-aware decoding plus optional 2-opt cleanup.
-5. Validated route-file, metrics, and plot generation.
+## Overview
 
-## Why this layout
+Welcome to the Quantum Courier Challenge! Your mission: develop and execute your own implementation(s) of quantum optimization algorithms for solving capacitated vehicle routing problems (CVRPs) that arise in various logistics applications.
 
-The challenge instances have a fixed depot at node `0`, Euclidean travel cost, and capacity defined as a maximum number of customers per vehicle. That makes a sweep-plus-QAOA split practical:
+The CVRP is NP-hard — the solution space grows exponentially with problem size. Quantum algorithms offer alternative heuristics that may produce better-quality solutions faster than known classical methods. Even marginal improvements (e.g., 0.5%) can translate to millions of dollars in annual logistics savings.
 
-- `sweep.py` handles customer assignment.
-- `qubo_builder.py` builds a permutation-style routing QUBO per vehicle cluster.
-- `qaoa_solver.py` runs QAOA only on the reduced local routing problems.
-- `validation.py` ensures submission files are not emitted unless the combined solution is feasible.
+The full challenge description, problem instances, and submission format are provided in `qCourier-YaleHackathon-2026.ipynb`.
 
-## Tested Python setup
+---
 
-This codebase was verified with Python `3.12`. The local machine used during implementation had Python `3.14` as the default `python3`, which does not currently match the installed Qiskit/qBraid package stack cleanly.
+## Getting Started
 
-Recommended setup:
+### Access qBraid
 
-```bash
-python3.12 -m venv .venv
-.venv/bin/pip3.12 install -r requirements.txt
-```
+All circuits must run on qBraid-provided simulators.
 
-## Run the solver
+1. Register at [account.qbraid.com](https://account.qbraid.com/signin) and confirm your email.
+2. Go to **Account > Wallet**, select "Custom", enter $10, and apply promo code **`YQ26`** for $10 in free credits.
+3. Go to **Account > Wallet** again, select the **Standard** monthly subscription ($20/mo), and apply promo code **`YQHACK26`** for one free month of standard subscription.
 
-Solve one instance:
+For more detailed instructions, see the notebook. 
 
-```bash
-.venv/bin/python3.12 -m src.main --instance data/instances/Instance1.json --mode local_statevector
-```
+---
 
-Solve all benchmark instances:
+## Requirements
 
-```bash
-.venv/bin/python3.12 -m src.main --all --mode local_statevector
-```
+- Formulate CVRP as a mathematical optimization program.
+- Implement a quantum or quantum-classical hybrid algorithm — no classical-only solutions.
+- Solution must be generalized (not hardcoded to specific instances).
+- All circuits must run on qBraid simulators.
+- Solve the CVRP instances provided in the notebook, starting from simple and scaling up.
 
-Faster local debug run:
+---
 
-```bash
-.venv/bin/python3.12 -m src.main --all --mode local_statevector --maxiter 5 --shots 256
-```
+## Submission
 
-Shot-based local simulation:
+Submit the following by forking this GitHub repository. Make sure to keep it public. 
 
-```bash
-.venv/bin/python3.12 -m src.main --instance data/instances/Instance2.json --mode local_aer --maxiter 5 --shots 256
-```
+1. **Code** — quantum implementation with a package specification file to recreate the environment.
+2. **Results** — solution files for each CVRP instance in the required format (see notebook), along with qubit count, gate operation count, and execution time per instance.
+3. **Documentation** — explanation of your algorithm, scalability, and any novel insights.
 
-Attempt qBraid-managed runtime discovery:
+---
 
-```bash
-.venv/bin/python3.12 -m src.main --instance data/instances/Instance2.json --mode qbraid_runtime
-```
+## Judging Criteria
 
-`qbraid_runtime` currently expects IBM Runtime credentials to be configured so that qBraid's `QiskitRuntimeProvider` can discover devices. If that is not configured, the CLI fails with a clear error instead of silently falling back to a local simulator.
+- Approximation ratio of the solution
+- Scale of problems solved
+- Novelty and resource efficiency
+- Quality of presentation
 
-## CLI flags
+---
 
-Useful overrides:
+## Prizes
 
-- `--qaoa-reps`
-- `--shots`
-- `--optimizer`
-- `--maxiter`
-- `--multi-start-sweep`
-- `--backend-name`
-- `--qbraid-channel`
-- `--disable-2opt`
-- `--row-penalty`
-- `--col-penalty`
+- 1st Place: $1,000 Amazon gift card
+- 2nd Place: $600 Amazon gift card
+- 3rd Place: $400 Amazon gift card
 
-## Inputs
+All participants receive one month of free qBraid platform access (non-commercial).
 
-Benchmark JSON files are in [`data/instances/`](data/instances). The schema is in [`data/schemas/cvrp_instance.schema.json`](data/schemas/cvrp_instance.schema.json).
+---
 
-Each instance uses:
+## Resources
 
-- depot `0`
-- Euclidean distances
-- `vehicles`
-- `capacity`
-- customer coordinates
-
-Optional per-instance QAOA overrides can be embedded under `qaoa`.
-
-## Outputs
-
-For each valid solve, the pipeline writes:
-
-- [`outputs/routes/`](outputs/routes)
-- [`submission/`](submission)
-- [`outputs/metrics/`](outputs/metrics)
-- [`outputs/plots/`](outputs/plots)
-
-Metrics include:
-
-- chosen sweep decomposition
-- cluster sizes
-- per-cluster route and distance
-- QAOA settings
-- qubit and gate-count estimates from the compiled optimal QAOA circuit
-- validation status
-
-## Repo structure
-
-Key files:
-
-- [`src/main.py`](src/main.py)
-- [`src/sweep.py`](src/sweep.py)
-- [`src/qubo_builder.py`](src/qubo_builder.py)
-- [`src/qaoa_solver.py`](src/qaoa_solver.py)
-- [`src/runtime.py`](src/runtime.py)
-- [`src/decoder.py`](src/decoder.py)
-- [`src/validation.py`](src/validation.py)
-
-## Verified locally
-
-The following commands were run successfully in the local Python `3.12` environment:
-
-- `.venv/bin/python3.12 -m src.main --all --mode local_statevector --maxiter 5 --shots 256`
-- `.venv/bin/python3.12 -m src.main --instance data/instances/Instance2.json --mode local_aer --maxiter 5 --shots 256`
-
-Those runs produced valid submission files for the four benchmark instances and metrics/plot artifacts in `outputs/`.
+- [qBraid SDK Documentation](https://docs.qbraid.com/v2/)
+- [Wikipedia: Vehicle Routing Problem](https://en.wikipedia.org/wiki/Vehicle_routing_problem)
+- [Qiskit Optimization Tutorial on VRP](https://qiskit-community.github.io/qiskit-optimization/tutorials/07_examples_vehicle_routing.html)
+- Online office hours: **4–5 PM EST, Saturday April 4th** — RTRC and QuantumCT staff available for questions. Use this [link](https://teams.microsoft.com/meet/28228728269636?p=XNlY8wgpb2SGm9iKdy)
+- On-site support available during the hackathon with RTX and QuantumCT staff present. 
