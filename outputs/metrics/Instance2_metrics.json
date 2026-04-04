@@ -1,0 +1,80 @@
+{
+  "instance_name": "Instance2",
+  "mode": "local_aer",
+  "provider": "local",
+  "backend": "aer_simulator",
+  "vehicles": 2,
+  "capacity": 2,
+  "num_customers": 3,
+  "sweep_multi_start": 16,
+  "sweep_direction": "clockwise",
+  "sweep_offset": 1,
+  "sweep_score": 26.43171474023014,
+  "clusters": [
+    [
+      2,
+      1
+    ],
+    [
+      3
+    ]
+  ],
+  "cluster_sizes": [
+    2,
+    1
+  ],
+  "cluster_routes": [
+    [
+      0,
+      1,
+      2,
+      0
+    ],
+    [
+      0,
+      3,
+      0
+    ]
+  ],
+  "cluster_distances": [
+    18.970612189302162,
+    7.211102550927978
+  ],
+  "cluster_sample_counts": [
+    15,
+    1
+  ],
+  "cluster_repaired_flags": [
+    false,
+    false
+  ],
+  "cluster_qubits": [
+    4,
+    1
+  ],
+  "cluster_gate_counts": [
+    19,
+    0
+  ],
+  "qaoa_reps": 1,
+  "shots": 256,
+  "optimizer": "COBYLA",
+  "maxiter": 5,
+  "penalties": {
+    "row_exactly_one": 20.0,
+    "col_exactly_one": 20.0
+  },
+  "two_opt_enabled": true,
+  "total_distance": 26.18171474023014,
+  "runtime_seconds": 0.6315238340757787,
+  "qubits_used": 4,
+  "gate_count": 19,
+  "resource_estimation_method": "transpiled_optimal_qaoa_circuit_per_cluster",
+  "valid": true,
+  "validation_errors": [],
+  "route_files": {
+    "internal": "outputs/routes/Instance2.txt",
+    "submission": "submission/Instance2.txt"
+  },
+  "plot_file": "outputs/plots/Instance2_routes.png"
+}

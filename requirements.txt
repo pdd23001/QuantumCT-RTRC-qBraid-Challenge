@@ -1,0 +1,12 @@
+numpy>=2.4
+scipy>=1.17
+matplotlib>=3.10
+jsonschema>=4.26
+pydantic>=2.12
+docplex>=2.32
+qiskit>=2.3
+qiskit-aer>=0.17
+qiskit-algorithms>=0.4
+qiskit-optimization>=0.7
+qiskit-ibm-runtime>=0.46
+qbraid>=0.11

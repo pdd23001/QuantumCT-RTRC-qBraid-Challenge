@@ -1,0 +1,98 @@
+{
+  "instance_name": "Instance3",
+  "mode": "local_statevector",
+  "provider": "local",
+  "backend": "statevector_sampler",
+  "vehicles": 3,
+  "capacity": 2,
+  "num_customers": 6,
+  "sweep_multi_start": 16,
+  "sweep_direction": "clockwise",
+  "sweep_offset": 0,
+  "sweep_score": 50.6964824711829,
+  "clusters": [
+    [
+      6,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "cluster_sizes": [
+    2,
+    2,
+    2
+  ],
+  "cluster_routes": [
+    [
+      0,
+      4,
+      6,
+      0
+    ],
+    [
+      0,
+      3,
+      5,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      0
+    ]
+  ],
+  "cluster_distances": [
+    22.648183051417163,
+    9.07768723046357,
+    18.970612189302162
+  ],
+  "cluster_sample_counts": [
+    15,
+    15,
+    16
+  ],
+  "cluster_repaired_flags": [
+    false,
+    false,
+    false
+  ],
+  "cluster_qubits": [
+    4,
+    4,
+    4
+  ],
+  "cluster_gate_counts": [
+    11,
+    11,
+    11
+  ],
+  "qaoa_reps": 1,
+  "shots": 256,
+  "optimizer": "COBYLA",
+  "maxiter": 5,
+  "penalties": {
+    "row_exactly_one": 20.0,
+    "col_exactly_one": 20.0
+  },
+  "two_opt_enabled": true,
+  "total_distance": 50.6964824711829,
+  "runtime_seconds": 1.948977958993055,
+  "qubits_used": 4,
+  "gate_count": 33,
+  "resource_estimation_method": "transpiled_optimal_qaoa_circuit_per_cluster",
+  "valid": true,
+  "validation_errors": [],
+  "route_files": {
+    "internal": "outputs/routes/Instance3.txt",
+    "submission": "submission/Instance3.txt"
+  },
+  "plot_file": "outputs/plots/Instance3_routes.png"
+}
