@@ -284,7 +284,7 @@ def load_instance(filename):
         reader = csv.DictReader(file)
         rows = list(reader)
 
-    instance_id = int(rows[0]["instance_id"])
+    instance_id = (rows[0]["instance_id"])
     num_vehicles = int(rows[0]["Nv"])
     vehicle_capacity = int(rows[0]["C"])
 
@@ -488,7 +488,7 @@ def print_results(results):
 
 
 if __name__ == "__main__":
-    instance_files = ["instance_1.csv", "instance_2.csv", "instance_3.csv", "instance_4.csv"]
+    instance_files = ["instance_1.csv", "instance_2.csv", "instance_3.csv", "instance_4.csv", "synthetic_data_1.csv"]
 
     results = []
     for filename in instance_files:
