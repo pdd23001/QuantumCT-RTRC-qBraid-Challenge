@@ -5,7 +5,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1258.570866,
-    "runtime": 0.00683002599998872,
+    "runtime": 0.006918756998857134,
     "valid": true,
     "routes": [
       {
@@ -151,7 +151,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1067.382657,
-    "runtime": 0.0032063469998320215,
+    "runtime": 0.0032264259989460697,
     "valid": true,
     "routes": [
       {
@@ -273,7 +273,7 @@
     "vehicles_allowed": 6,
     "vehicles_used": 6,
     "distance": 1204.220332,
-    "runtime": 0.0022513570002047345,
+    "runtime": 0.0021393879997049225,
     "valid": true,
     "routes": [
       {
@@ -394,7 +394,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1049.064207,
-    "runtime": 0.007763286000226799,
+    "runtime": 0.00812001000122109,
     "valid": true,
     "routes": [
       {
@@ -542,7 +542,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1067.162422,
-    "runtime": 0.0036854919999314006,
+    "runtime": 0.0034619889993336983,
     "valid": true,
     "routes": [
       {
@@ -666,7 +666,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1130.404721,
-    "runtime": 0.003982192999501422,
+    "runtime": 0.004000156999609317,
     "valid": true,
     "routes": [
       {
@@ -794,7 +794,7 @@
     "vehicles_allowed": 6,
     "vehicles_used": 6,
     "distance": 1043.604584,
-    "runtime": 0.00910190699960367,
+    "runtime": 0.008804576000329689,
     "valid": true,
     "routes": [
       {
@@ -958,7 +958,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 1127.666174,
-    "runtime": 0.008724126999368309,
+    "runtime": 0.009925012000167044,
     "valid": true,
     "routes": [
       {
@@ -1114,7 +1114,7 @@
     "vehicles_allowed": 5,
     "vehicles_used": 5,
     "distance": 873.83782,
-    "runtime": 0.0018651219997991575,
+    "runtime": 0.0018679759996302892,
     "valid": true,
     "routes": [
       {
@@ -1222,7 +1222,7 @@
     "vehicles_allowed": 6,
     "vehicles_used": 6,
     "distance": 1116.011132,
-    "runtime": 0.004071629000463872,
+    "runtime": 0.004142656998737948,
     "valid": true,
     "routes": [
       {
@@ -1361,7 +1361,7 @@
     "vehicles_allowed": 6,
     "vehicles_used": 6,
     "distance": 1100.829325,
-    "runtime": 0.007948790999762423,
+    "runtime": 0.007577207999929669,
     "valid": true,
     "routes": [
       {
@@ -1520,7 +1520,7 @@
     "vehicles_allowed": 6,
     "vehicles_used": 6,
     "distance": 1004.711283,
-    "runtime": 0.004082147000190162,
+    "runtime": 0.004086240000106045,
     "valid": true,
     "routes": [
       {
@@ -1657,7 +1657,7 @@
     "vehicles_allowed": 7,
     "vehicles_used": 7,
     "distance": 1031.840496,
-    "runtime": 0.003968171000451548,
+    "runtime": 0.002162441998734721,
     "valid": true,
     "routes": [
       {
@@ -1787,7 +1787,7 @@
     "vehicles_allowed": 7,
     "vehicles_used": 7,
     "distance": 1265.911248,
-    "runtime": 0.0062647329996252665,
+    "runtime": 0.006586041999980807,
     "valid": true,
     "routes": [
       {
@@ -1950,7 +1950,7 @@
     "vehicles_allowed": 7,
     "vehicles_used": 7,
     "distance": 1207.659849,
-    "runtime": 0.008146678999764845,
+    "runtime": 0.008100050999928499,
     "valid": true,
     "routes": [
       {
@@ -2119,7 +2119,7 @@
     "vehicles_allowed": 7,
     "vehicles_used": 7,
     "distance": 1368.050102,
-    "runtime": 0.002990050999869709,
+    "runtime": 0.0031334079994849162,
     "valid": true,
     "routes": [
       {
@@ -2258,7 +2258,7 @@
     "vehicles_allowed": 7,
     "vehicles_used": 7,
     "distance": 1154.643479,
-    "runtime": 0.0031704209995950805,
+    "runtime": 0.0030431159993895562,
     "valid": true,
     "routes": [
       {
@@ -2398,7 +2398,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1497.390036,
-    "runtime": 0.004296793999856163,
+    "runtime": 0.004226764998747967,
     "valid": true,
     "routes": [
       {
@@ -2565,7 +2565,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1545.726098,
-    "runtime": 0.007774477000566549,
+    "runtime": 0.007384258999081794,
     "valid": true,
     "routes": [
       {
@@ -2756,7 +2756,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1575.907152,
-    "runtime": 0.0025601059996915865,
+    "runtime": 0.0027863989998877514,
     "valid": true,
     "routes": [
       {
@@ -2911,7 +2911,7 @@
     "vehicles_allowed": 8,
     "vehicles_used": 8,
     "distance": 1041.5936,
-    "runtime": 0.001860737000242807,
+    "runtime": 0.0018556129998614779,
     "valid": true,
     "routes": [
       {
@@ -3046,7 +3046,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1290.418542,
-    "runtime": 0.004949514000145427,
+    "runtime": 0.004864865000854479,
     "valid": true,
     "routes": [
       {
@@ -3218,7 +3218,7 @@
     "vehicles_allowed": 10,
     "vehicles_used": 10,
     "distance": 1363.072951,
-    "runtime": 0.0039069550002750475,
+    "runtime": 0.003964968000218505,
     "valid": true,
     "routes": [
       {
@@ -3393,7 +3393,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1529.503833,
-    "runtime": 0.003838672999336268,
+    "runtime": 0.004260812998836627,
     "valid": true,
     "routes": [
       {
@@ -3559,7 +3559,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1483.203504,
-    "runtime": 0.006522143999973196,
+    "runtime": 0.0068600369995692745,
     "valid": true,
     "routes": [
       {
@@ -3744,7 +3744,7 @@
     "vehicles_allowed": 9,
     "vehicles_used": 9,
     "distance": 1230.261833,
-    "runtime": 0.006461591000515909,
+    "runtime": 0.006329944999379222,
     "valid": true,
     "routes": [
       {
@@ -3920,7 +3920,7 @@
     "vehicles_allowed": 10,
     "vehicles_used": 10,
     "distance": 1243.386848,
-    "runtime": 0.001586219999808236,
+    "runtime": 0.0017027899993991014,
     "valid": true,
     "routes": [
       {

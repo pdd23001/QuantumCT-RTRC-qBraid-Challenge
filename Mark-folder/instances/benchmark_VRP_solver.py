@@ -253,6 +253,12 @@ def plot_summary(results, output_dir="benchmark_output"):
     plt.title("Runtime vs Problem Size")
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
+    #Create a linear regression line
+    if len(customers) > 1:
+        coeffs = np.polyfit(customers, runtimes, deg=1)
+        x_fit = np.linspace(min(customers), max(customers), 100)
+        y_fit = np.polyval(coeffs, x_fit)
+        plt.plot(x_fit, y_fit, color="red", linestyle="--", label=f"Fit: Runtime={coeffs[0]:.4f}customers + {coeffs[1]:.4f}")
     plt.savefig(output_path / "runtime_vs_size.png", dpi=180, bbox_inches="tight")
     plt.close()
 
