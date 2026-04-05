@@ -26,6 +26,11 @@ def euclidean_distance(a: Tuple[float, float], b: Tuple[float, float]) -> float:
 
 
 def build_distance_matrix(customers: List[Dict[str, Any]]) -> np.ndarray:
+    """
+    Assumes customer_id values match row/column positions:
+    0, 1, 2, ..., n
+    which is true for your official_instances.json.
+    """
     coords = [(float(c["x"]), float(c["y"])) for c in customers]
     n = len(coords)
     dist = np.zeros((n, n), dtype=float)
@@ -55,6 +60,10 @@ def decode_permutation(
     capacity: int,
     max_vehicles: int,
 ) -> Tuple[List[List[int]], bool]:
+    """
+    Returns routes in full form, e.g.
+    [0, 3, 2, 0], [0, 1, 4, 0]
+    """
     routes: List[List[int]] = []
     current_route: List[int] = [0]
     current_load = 0
@@ -136,7 +145,8 @@ class OfficialPyGADVRP:
         self.instance_id = instance["instance_id"]
         self.Nv = int(instance["Nv"])
         self.C = int(instance["C"])
-        self.customers = instance["customers"]
+        self.raw_customers = instance["customers"]
+
         self.num_generations = int(num_generations)
         self.sol_per_pop = int(sol_per_pop)
         self.num_parents_mating = int(num_parents_mating)
@@ -146,13 +156,39 @@ class OfficialPyGADVRP:
         random.seed(self.seed)
         np.random.seed(self.seed)
 
-        self.customer_ids = [c["customer_id"] for c in self.customers if c["customer_id"] != 0]
-        self.demands = {int(c["customer_id"]): int(c["demand"]) for c in self.customers}
+        # Keep full customer list including depot for distance matrix
+        self.customers = self.raw_customers
+
+        # Extract depot and customer-only structures
+        self.depot = None
+        self.customer_map: Dict[int, Tuple[float, float, int]] = {}
+        self.customer_ids: List[int] = []
+        self.demands: Dict[int, int] = {}
+
+        for c in self.customers:
+            cid = int(c["customer_id"])
+            x = float(c["x"])
+            y = float(c["y"])
+            demand = int(c["demand"])
+
+            self.demands[cid] = demand
+
+            if cid == 0:
+                self.depot = (x, y)
+            else:
+                self.customer_ids.append(cid)
+                self.customer_map[cid] = (x, y, demand)
+
+        if self.depot is None:
+            raise ValueError(f"{self.instance_id}: depot (customer_id=0) not found.")
+
+        self.customer_ids.sort()
         self.dist = build_distance_matrix(self.customers)
 
         self.best_distance = float("inf")
         self.best_routes: List[List[int]] = []
         self.best_valid = False
+        self.last_runtime = 0.0
 
     def initial_population(self) -> np.ndarray:
         base = np.array(self.customer_ids, dtype=int)
@@ -186,10 +222,15 @@ class OfficialPyGADVRP:
 
         if valid and distance < self.best_distance:
             self.best_distance = distance
-            self.best_routes = routes
+            self.best_routes = [route[:] for route in routes]
             self.best_valid = True
 
         return fitness
+
+    def total_distance(self) -> float:
+        if not self.best_routes:
+            return 0.0
+        return total_cost(self.best_routes, self.dist)
 
     def solve(self) -> Dict[str, Any]:
         start = time.perf_counter()
@@ -215,6 +256,12 @@ class OfficialPyGADVRP:
         best_solution, best_fitness, _ = ga.best_solution()
         _, final_distance, final_valid, final_routes = self.evaluate(best_solution)
         runtime = time.perf_counter() - start
+        self.last_runtime = runtime
+
+        # Store final solution on object so plotting works
+        self.best_routes = [route[:] for route in final_routes]
+        self.best_distance = final_distance
+        self.best_valid = final_valid
 
         return {
             "instance_id": self.instance_id,
@@ -227,6 +274,75 @@ class OfficialPyGADVRP:
             "C": self.C,
             "customers": len(self.customer_ids),
         }
+
+    def plot_routes(self, output_path: Path) -> None:
+        fig, ax = plt.subplots(figsize=(12, 8))
+
+        depot_x, depot_y = self.depot
+
+        # Depot
+        ax.scatter(
+            depot_x,
+            depot_y,
+            c="black",
+            marker="X",
+            s=220,
+            label="Depot",
+            zorder=5,
+        )
+        ax.text(depot_x + 0.25, depot_y + 0.25, "0", fontsize=11, weight="bold")
+
+        # Customers
+        xs = [self.customer_map[cid][0] for cid in sorted(self.customer_map)]
+        ys = [self.customer_map[cid][1] for cid in sorted(self.customer_map)]
+        ax.scatter(xs, ys, c="black", s=40, zorder=4)
+
+        for cid in sorted(self.customer_map):
+            x, y, _ = self.customer_map[cid]
+            ax.text(x + 0.25, y + 0.25, str(cid), fontsize=9)
+
+        # Routes
+        colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+
+        for route_idx, route in enumerate(self.best_routes, start=1):
+            # route is like [0, 3, 2, 0]
+            route_customers = [node for node in route if node != 0]
+
+            points = [(depot_x, depot_y)]
+            for customer_id in route_customers:
+                x, y, _ = self.customer_map[customer_id]
+                points.append((x, y))
+            points.append((depot_x, depot_y))
+            points = np.array(points, dtype=float)
+
+            ax.plot(
+                points[:, 0],
+                points[:, 1],
+                linewidth=2.2,
+                color=colors[(route_idx - 1) % len(colors)],
+                marker="o",
+                markersize=4,
+                label=f"Route {route_idx}: {route}",
+                zorder=2,
+            )
+
+        ax.set_title(
+            f"{self.instance_id} - PyGAD VRP\n"
+            f"dist={self.total_distance():.3f}, time={self.last_runtime:.6f}s",
+            fontsize=16,
+        )
+        ax.set_xlabel("X", fontsize=12)
+        ax.set_ylabel("Y", fontsize=12)
+        ax.grid(True, alpha=0.5)
+        ax.legend(fontsize=8, loc="best")
+        ax.set_aspect("equal", adjustable="box")
+
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=180, bbox_inches="tight")
+        plt.close(fig)
 
 
 # ============================================================
@@ -267,6 +383,10 @@ def save_plot(results: List[Dict[str, Any]], output_dir: Path) -> None:
     plt.close()
 
 
+# ============================================================
+# MAIN
+# ============================================================
+
 def main() -> None:
     base_dir = Path(__file__).resolve().parent
     input_path = base_dir / ".." / "official_instances.json"
@@ -282,16 +402,21 @@ def main() -> None:
         solver = OfficialPyGADVRP(instance)
         result = solver.solve()
         results.append(result)
+
         write_instance_txt(result, output_dir)
+
         print(
             f"[PyGAD-VRP] {result['instance_id']}: "
-            f"distance={result['distance']:.2f}, runtime={result['runtime']:.4f}s, valid={result['valid']}"
+            f"distance={result['distance']:.2f}, "
+            f"runtime={result['runtime']:.4f}s, "
+            f"valid={result['valid']}"
         )
 
-    with open(output_dir / "pygad_vrp_results.json", "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2)
+        solver.plot_routes(output_dir / "png" / f"{result['instance_id']}_routes.png")
 
     save_plot(results, output_dir)
+
+
     print(f"Saved outputs to: {output_dir}")
 
 

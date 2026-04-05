@@ -46,7 +46,6 @@ def build_result(instance_id: str, routes: List[dict], instance_meta: dict | Non
             'vehicles_allowed': None,
             'vehicles_used': len(routes),
             'distance': None,
-            'runtime': None,
             'valid': None,
         })
         for r in routes:
@@ -111,7 +110,6 @@ def build_result(instance_id: str, routes: List[dict], instance_meta: dict | Non
         'vehicles_allowed': vehicles_allowed,
         'vehicles_used': len(routes),
         'distance': round(total_distance, 6),
-        'runtime': None,
         'valid': valid,
     })
     return result
