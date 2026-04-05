@@ -1,0 +1,425 @@
+[
+  {
+    "id": "instance_10",
+    "customers": 25,
+    "vehicles_allowed": 7,
+    "vehicles_used": 5,
+    "distance": 141.744909,
+    "runtime": 0.000358102006430272,
+    "valid": true,
+    "routes": [
+      {
+        "vehicle": 1,
+        "route": [
+          0,
+          18,
+          8,
+          2,
+          20,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 24.791776
+      },
+      {
+        "vehicle": 2,
+        "route": [
+          0,
+          22,
+          24,
+          14,
+          12,
+          6,
+          0
+        ],
+        "load": 5,
+        "distance": 32.759839
+      },
+      {
+        "vehicle": 3,
+        "route": [
+          0,
+          19,
+          23,
+          15,
+          7,
+          4,
+          0
+        ],
+        "load": 5,
+        "distance": 31.290612
+      },
+      {
+        "vehicle": 4,
+        "route": [
+          0,
+          11,
+          1,
+          10,
+          5,
+          13,
+          0
+        ],
+        "load": 5,
+        "distance": 28.941368
+      },
+      {
+        "vehicle": 5,
+        "route": [
+          0,
+          9,
+          16,
+          21,
+          3,
+          17,
+          0
+        ],
+        "load": 5,
+        "distance": 23.961314
+      }
+    ]
+  },
+  {
+    "id": "instance_11",
+    "customers": 25,
+    "vehicles_allowed": 7,
+    "vehicles_used": 6,
+    "distance": 138.858456,
+    "runtime": 0.0003762720007216558,
+    "valid": true,
+    "routes": [
+      {
+        "vehicle": 1,
+        "route": [
+          0,
+          19,
+          10,
+          3,
+          25,
+          0
+        ],
+        "load": 4,
+        "distance": 28.620769
+      },
+      {
+        "vehicle": 2,
+        "route": [
+          0,
+          5,
+          24,
+          21,
+          7,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 31.618086
+      },
+      {
+        "vehicle": 3,
+        "route": [
+          0,
+          2,
+          13,
+          14,
+          1,
+          8,
+          0
+        ],
+        "load": 5,
+        "distance": 31.511768
+      },
+      {
+        "vehicle": 4,
+        "route": [
+          0,
+          16,
+          15,
+          4,
+          12,
+          0
+        ],
+        "load": 4,
+        "distance": 24.580498
+      },
+      {
+        "vehicle": 5,
+        "route": [
+          0,
+          18,
+          23,
+          0
+        ],
+        "load": 2,
+        "distance": 5.656854
+      },
+      {
+        "vehicle": 6,
+        "route": [
+          0,
+          6,
+          20,
+          11,
+          17,
+          9,
+          0
+        ],
+        "load": 5,
+        "distance": 16.870482
+      }
+    ]
+  },
+  {
+    "id": "instance_12",
+    "customers": 25,
+    "vehicles_allowed": 7,
+    "vehicles_used": 6,
+    "distance": 154.400643,
+    "runtime": 0.0003689989971462637,
+    "valid": true,
+    "routes": [
+      {
+        "vehicle": 1,
+        "route": [
+          0,
+          14,
+          22,
+          3,
+          6,
+          11,
+          0
+        ],
+        "load": 5,
+        "distance": 34.469298
+      },
+      {
+        "vehicle": 2,
+        "route": [
+          0,
+          1,
+          7,
+          19,
+          0
+        ],
+        "load": 3,
+        "distance": 21.878867
+      },
+      {
+        "vehicle": 3,
+        "route": [
+          0,
+          5,
+          13,
+          20,
+          12,
+          10,
+          0
+        ],
+        "load": 5,
+        "distance": 28.400342
+      },
+      {
+        "vehicle": 4,
+        "route": [
+          0,
+          4,
+          23,
+          16,
+          0
+        ],
+        "load": 3,
+        "distance": 19.147258
+      },
+      {
+        "vehicle": 5,
+        "route": [
+          0,
+          2,
+          18,
+          8,
+          15,
+          17,
+          0
+        ],
+        "load": 5,
+        "distance": 22.963883
+      },
+      {
+        "vehicle": 6,
+        "route": [
+          0,
+          9,
+          21,
+          25,
+          24,
+          0
+        ],
+        "load": 4,
+        "distance": 27.540995
+      }
+    ]
+  },
+  {
+    "id": "instance_13",
+    "customers": 25,
+    "vehicles_allowed": 7,
+    "vehicles_used": 5,
+    "distance": 135.458886,
+    "runtime": 0.000985425001999829,
+    "valid": true,
+    "routes": [
+      {
+        "vehicle": 1,
+        "route": [
+          0,
+          18,
+          9,
+          3,
+          14,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 30.577989
+      },
+      {
+        "vehicle": 2,
+        "route": [
+          0,
+          4,
+          24,
+          5,
+          8,
+          21,
+          0
+        ],
+        "load": 5,
+        "distance": 33.427643
+      },
+      {
+        "vehicle": 3,
+        "route": [
+          0,
+          6,
+          13,
+          15,
+          11,
+          23,
+          0
+        ],
+        "load": 5,
+        "distance": 30.316855
+      },
+      {
+        "vehicle": 4,
+        "route": [
+          0,
+          2,
+          20,
+          1,
+          10,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 18.583637
+      },
+      {
+        "vehicle": 5,
+        "route": [
+          0,
+          12,
+          19,
+          17,
+          16,
+          7,
+          0
+        ],
+        "load": 5,
+        "distance": 22.552763
+      }
+    ]
+  },
+  {
+    "id": "instance_14",
+    "customers": 25,
+    "vehicles_allowed": 7,
+    "vehicles_used": 5,
+    "distance": 146.620203,
+    "runtime": 0.0003513730043778196,
+    "valid": true,
+    "routes": [
+      {
+        "vehicle": 1,
+        "route": [
+          0,
+          4,
+          7,
+          24,
+          10,
+          19,
+          0
+        ],
+        "load": 5,
+        "distance": 30.258669
+      },
+      {
+        "vehicle": 2,
+        "route": [
+          0,
+          6,
+          8,
+          15,
+          14,
+          17,
+          0
+        ],
+        "load": 5,
+        "distance": 27.060684
+      },
+      {
+        "vehicle": 3,
+        "route": [
+          0,
+          3,
+          11,
+          22,
+          12,
+          18,
+          0
+        ],
+        "load": 5,
+        "distance": 30.153942
+      },
+      {
+        "vehicle": 4,
+        "route": [
+          0,
+          1,
+          16,
+          23,
+          5,
+          21,
+          0
+        ],
+        "load": 5,
+        "distance": 29.083652
+      },
+      {
+        "vehicle": 5,
+        "route": [
+          0,
+          2,
+          9,
+          13,
+          20,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 30.063257
+      }
+    ]
+  }
+]

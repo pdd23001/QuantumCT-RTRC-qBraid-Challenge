@@ -202,7 +202,7 @@ def run_benchmark(json_path="setA_random_instances_grouped.json", output_dir="be
         }
         results.append(result)
 
-        image_path = output_path / f"outputs_png/{vrp.instance_id}_routes.png"
+        image_path = output_path / f"outputs_png_{vrp.instance_id}.png"
         vrp.plot_routes(image_path)
         print(f"Saved plot: {image_path}")
 
@@ -233,6 +233,15 @@ def plot_summary(results, output_dir="benchmark_output"):
     plt.xticks(range(len(ids)), display_labels, rotation=45, fontsize=8)
     plt.grid(True, axis="y", alpha=0.3)
     plt.tight_layout()
+    for bar, value in zip(plt.gca().containers[0], distances):
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height(),
+            f"{value:.2f}",
+            ha="center",
+            va="bottom",
+            fontsize=12,
+        )
     plt.savefig(output_path / "distance.png", dpi=180, bbox_inches="tight")
     plt.close()
 
@@ -267,7 +276,7 @@ def plot_summary(results, output_dir="benchmark_output"):
 
 if __name__ == "__main__":
     benchmark_results = run_benchmark(
-        json_path="setA_random_instances_grouped.json",
-        output_dir="benchmark_output",
+        json_path="c5n25.json",
+        output_dir="ClarkeWright/c5n25_output",
     )
-    plot_summary(benchmark_results, output_dir="benchmark_output")
+    plot_summary(benchmark_results, output_dir="ClarkeWright/c5n25_output")
