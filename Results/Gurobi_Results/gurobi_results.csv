@@ -1,0 +1,7 @@
+instance,config,trial_1,avg_value,best_value,avg_time_s,notes
+1,Gurobi Lazy Exact,21.74,21.74,21.74,0.02,Exact deterministic MILP via Gurobi
+2,Gurobi Lazy Exact,26.18,26.18,26.18,0.02,Exact deterministic MILP via Gurobi
+3,Gurobi Lazy Exact,49.5,49.5,49.5,0.02,Exact deterministic MILP via Gurobi
+4,Gurobi Lazy Exact,58.18,58.18,58.18,0.13,Exact deterministic MILP via Gurobi
+5,Gurobi Lazy Exact,86.43,86.43,86.43,11.59,Exact deterministic MILP via Gurobi
+6,Gurobi Lazy Exact,105.61,105.61,105.61,7.74,Exact deterministic MILP via Gurobi

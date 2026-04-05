@@ -1,0 +1,7 @@
+instance,config,trial_1,trial_2,trial_3,trial_4,trial_5,avg_value,best_value,qubits_used,total_gates,avg_time_s
+1,"Aer CPU | 1024 shots | COBYLA | 2 reps | 2 restarts",21.74,21.74,21.74,21.74,21.74,21.74,21.74,9,333,6.13
+2,"Aer CPU | 1024 shots | COBYLA | 2 reps | 2 restarts",26.18,26.18,26.18,26.18,26.18,26.18,26.18,4,82,3.29
+3,"Aer CPU | 2048 shots | COBYLA | 2 reps | 2 restarts",49.50,49.50,49.50,49.50,49.50,49.50,49.50,4,246,8.5
+4,"Aer CPU | 4096 shots | COBYLA | 2 reps | 2 restarts",58.18,58.18,58.18,58.18,58.18,58.18,58.18,9,1332,24.97
+5,"Aer CPU | 8192 shots | COBYLA | 3 reps | 2 restarts",87.01,86.43,92.69,86.43,86.43,87.80,86.43,16,4340,93.5
+6,"Aer GPU | 8192 shots | COBYLA | 3 reps | 2 restarts",108.83,115.63,108.83,108.83,108.83,110.19,108.83,25,8975,232.3

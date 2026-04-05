@@ -1,0 +1,7 @@
+instance,config,trial_1,trial_2,trial_3,trial_4,trial_5,avg_value,best_value,avg_time_s,notes
+1, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,21.74,21.74,21.74,21.74,21.74,21.74,21.74,0.07,"5/5 trials feasible; all trials matched"
+2, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,26.18,26.18,26.18,26.18,26.18,26.18,26.18,0.07,"5/5 trials feasible; all trials matched"
+3, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,49.50,49.50,49.50,49.50,49.50,49.50,49.50,0.10,"5/5 trials feasible; all trials matched"
+4, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,58.18,58.42,58.42,58.42,58.18,58.33,58.18,0.17,"5/5 trials feasible; trial values varied across seeds"
+5, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,87.21,86.75,93.79,89.34,89.42,89.30,86.75,0.25,"5/5 trials feasible; trial values varied across seeds"
+6, GA | 5 trials | 120 generations | population 40 | 12 parents | 20% mutation,120.41,112.45,117.67,111.49,123.17,117.04,111.49,0.30,"5/5 trials feasible; trial values varied across seeds"
