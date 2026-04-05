@@ -389,8 +389,8 @@ def save_plot(results: List[Dict[str, Any]], output_dir: Path) -> None:
 
 def main() -> None:
     base_dir = Path(__file__).resolve().parent
-    input_path = base_dir / ".." / "c5n25.json"
-    output_dir = base_dir / "c5n25_outputs"
+    input_path = base_dir / ".." / "final_instances.json"
+    output_dir = base_dir / "final_instances_output"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     with open(input_path, "r", encoding="utf-8") as f:
