@@ -18,7 +18,7 @@ from common import route_distance
 # 2-opt
 # ---------------------------------------------------------------------------
 
-def two_opt(route, D, max_iter=None):
+def two_opt(route, D, max_iter=None, max_window=15):
     """
     Improve a single route with 2-opt.  Only accepts improving moves.
 
@@ -42,7 +42,8 @@ def two_opt(route, D, max_iter=None):
         improved = False
         iters += 1
         for i in range(len(best) - 1):
-            for j in range(i + 2, len(best)):
+            j_end = min(len(best), i + 2 + max_window) if max_window else len(best)
+            for j in range(i + 2, j_end):
                 # Current cost of edge (i, i+1) + edge (j, j+1)
                 # After reversal: edge (i, j) + edge (i+1, j+1)
                 a = best[i]
@@ -63,7 +64,7 @@ def two_opt(route, D, max_iter=None):
     return best
 
 
-def two_opt_all(routes, D, max_iter=None):
+def two_opt_all(routes, D, max_iter=None, max_window=15):
     """
     Apply 2-opt to every route in a solution.
 
@@ -77,7 +78,7 @@ def two_opt_all(routes, D, max_iter=None):
     -------
     list[list[int]]  -- new route list with improved routes
     """
-    return [two_opt(r, D, max_iter=max_iter) for r in routes]
+    return [two_opt(r, D, max_iter=max_iter, max_window=max_window) for r in routes]
 
 
 # ---------------------------------------------------------------------------
@@ -204,7 +205,7 @@ def nearest_neighbor_route(customers, D):
 # Cleanup pass
 # ---------------------------------------------------------------------------
 
-def cleanup_solution(routes, D, use_three_opt=False, three_opt_threshold=15):
+def cleanup_solution(routes, D, use_three_opt=False, three_opt_threshold=15, max_window=15):
     """
     Apply 2-opt (and optionally 3-opt) to all routes.
 
@@ -221,4 +222,4 @@ def cleanup_solution(routes, D, use_three_opt=False, three_opt_threshold=15):
     """
     if use_three_opt:
         return three_opt_all(routes, D, max_route_len=three_opt_threshold)
-    return two_opt_all(routes, D)
+    return two_opt_all(routes, D, max_window=max_window)
