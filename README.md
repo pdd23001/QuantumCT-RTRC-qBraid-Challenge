@@ -5,155 +5,6 @@
 Quantum-classical hybrid solution for the **Capacitated Vehicle Routing Problem (CVRP)** that decouples problem size from qubit count. We benchmark five algorithms — **Gurobi (exact MIP)**, **Genetic Algorithm**, **QAOA**, **DQI**, and **QITE** — across six progressively harder instances (5 to 25 nodes), with live hardware execution on **IBM `ibm_fez`** and **Rigetti Ankaa** via qBraid.
 
 ---
-
-## Setup and Reproduction
-
-```bash
-# Clone and install
-git clone <repo-url>
-cd QuantumCT-RTRC-qBraid-Challenge
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-**Key dependencies:** `qiskit 2.3`, `qiskit-aer`, `qiskit-ibm-runtime`, `qiskit-optimization`, `gurobipy`, `qbraid`, `azure-quantum`, `numpy`, `scipy`, `pandas`, `matplotlib`
-
-To run any algorithm, open the corresponding notebook in `Algorithms/` and execute all cells. Results are written to the matching `Results/` subdirectory.
-
-> **Note on hardware reproduction:** All quantum algorithms run fully on the Qiskit Aer simulator by default — no cloud access is needed to reproduce every result in this repo. To reproduce the hardware sampling runs, you will need:
-> - **IBM Quantum:** An IBM Quantum account and API key (`IBMQ_TOKEN`). Set `USE_REAL_HARDWARE = True` in `qaoa_ibm.ipynb`. The Open Plan provides queue-based access to `ibm_fez`; a paid plan is required for `Session`-mode iterative optimization.
-> - **qBraid:** A qBraid account with access to a supported QPU. Set `USE_REAL_HARDWARE = True` in `qaoa_qbraid.ipynb`. The `DEVICE_ID` variable controls which backend is targeted.
-> - **Gurobi:** A valid `gurobi.lic` license file (free for academics) placed in your home directory. Required only for `gurobi.ipynb`.
-
----
-
-## Repository Structure — Complete File Reference
-
-### Root Directory
-
-| File | Description |
-|------|-------------|
-| `final_instances.json` | All 6 CVRP problem instances. Each entry contains `instance_id`, number of vehicles `Nv`, capacity `C`, and a list of customers with `(x, y)` coordinates and `demand` values. Node 0 is always the depot at the origin. Instances scale from 5 customers (Instance 1) to 25 customers (Instance 6). |
-| `requirements.txt` | Pinned Python dependencies for exact reproduction. Includes `qiskit==2.3.1`, `qiskit-aer==0.17.2`, `qiskit-ibm-runtime==0.46.1`, `qiskit-optimization==0.7.0`, `gurobipy==13.0.1`, `qbraid`, `azure-quantum==3.8.0`, and supporting libraries (`numpy`, `scipy`, `pandas`, `matplotlib`). |
-| `qCourier-YaleHackathon-2026.ipynb` | The original hackathon problem statement notebook provided by the organizers. Contains the challenge description, CVRP mathematical formulation, judging criteria (approximation ratio, scale, novelty, presentation quality), and submission requirements. This is **not** our code — it is the reference specification we built against. |
-| `README.md` | This file. |
-
-### `Algorithms/` — Solver Notebooks
-
-Each notebook is self-contained: load the instance JSON, run decomposition, solve, and look at results.
-
-| File | Algorithm | Backend | What It Does |
-|------|-----------|---------|-------------|
-| `gurobi.ipynb` | Gurobi MIP | Classical (Gurobi) | Solves the full CVRP exactly using Mixed-Integer Programming with lazy subtour elimination callbacks. Contains two solver variants: an eager formulation (`solve_cvrp_gurobi`) and the optimized lazy version (`solve_cvrp_gurobi_lazy`). Iterates over all 6 instances, exports route `.txt` files, route visualization `.png` plots, and a summary CSV to `Results/Gurobi_Results/`. |
-| `ga.ipynb` | Genetic Algorithm | Classical (PyGAD) | Evolutionary meta-heuristic solver using PyGAD. Configures population size (40), parent count (12), ordered crossover, 20% swap mutation, and 120 generations. Runs 5 independent trials per instance with different random seeds to capture solution variability. Exports route `.txt` files, route plots, and `ga_results.csv` with per-trial objective values. Also generates performance analysis charts comparing best vs. average distance across instances. |
-| `qaoa_ibm.ipynb` | QAOA | Aer Simulator + IBM `ibm_fez` | The primary quantum notebook. Implements the full pipeline: agglomerative clustering with inter-cluster swaps, position-formulation QUBO construction, QUBO-to-Ising conversion, `QAOAAnsatz` with linear ramp + warm-start + random restart initialization, COBYLA optimization on `AerEstimator` (CPU or GPU), batched sampling via `SamplerV2`, and bitstring decoding. Contains two execution modes controlled by `USE_REAL_HARDWARE` and `USE_AER_FOR_OPT` flags. When hardware mode is enabled, circuits are transpiled via `generate_preset_pass_manager` and submitted to IBM `ibm_fez` through a `Session`. Includes a full feasibility checker (visit-once, flow conservation, capacity, depot start/end) and exports convergence CSVs, route plots, and `qaoa_results.csv` with qubit counts, gate counts, and timing data. |
-| `qaoa_qbraid.ipynb` | QAOA | Aer Simulator + Rigetti via qBraid | Identical QAOA pipeline to `qaoa_ibm.ipynb` but re-targeted for qBraid's runtime layer. Connects to a cloud QPU via `qbraid.runtime.QbraidDevice` (configured for `DEVICE_ID = "aws:ionq:qpu:forte-1"`). Handles qBraid-specific circuit submission: strips `GlobalPhaseGate` instructions (unsupported by the transpilation bridge), resets global phase, and submits via `device.run()` with robust result extraction handling multiple count formats. Optimization runs on Aer; only sampling hits the QPU. |
-| `dqi.ipynb` | DQI | Aer Simulator | The production DQI implementation. Implements route-by-route construction: farthest-seed selection, nearest-neighbor neighborhood formation, QUBO subset encoding with Clarke-Wright savings, DQI circuit construction (Hadamard → phase oracle → Hadamard → measure), Aer-backed circuit execution, classical bitstring decoding and repair, Held-Karp exact TSP ordering, 2-opt local search, and inter-route swap refinement. Includes a benchmark section that runs 5 seeded trials across all 6 instances with configurable shots (1024–8192), exporting convergence traces, route visualizations, and `dqi_results.csv`. |
-| `qite.ipynb` | QITE | Aer Statevector | Quantum Imaginary Time Evolution solver. Implements numerical imaginary-time propagation: constructs the full Hamiltonian matrix from the Ising model, computes the matrix exponential propagator via `scipy.linalg.expm`, applies 50 timesteps of $e^{-\Delta\tau H}$ with renormalization, then loads the evolved statevector into `AerSimulator` for probability extraction and bitstring decoding. Runs Instances 1–4 only (Instances 5–6 exceed statevector memory). Includes an energy convergence tracker, scaling benchmark section, and convergence visualization utilities. |
-
-### `Results/` — Output Data
-
-Every algorithm writes to its own isolated subdirectory. Results are fully reproducible from the corresponding notebook.
-
-#### `Results/Gurobi_Results/`
-| File/Directory | Contents |
-|----------------|----------|
-| `Txt_Format_Results/Instance{1-6}.txt` | Competition submission format. Each line is a route: `r1: 0, 3, 5, 0` (depot → customers → depot). One file per instance. |
-| `Result_Graphs/Instance{1-6}_Result.png` | Spatial route visualization with colored paths per vehicle, customer node labels, and the depot marked. |
-| `gurobi_results.csv` | Columns: `instance`, `config`, `trial_1`, `avg_value`, `best_value`, `avg_time_s`, `notes`. Single trial per instance (deterministic solver). |
-
-#### `Results/GA_Results/`
-| File/Directory | Contents |
-|----------------|----------|
-| `Txt_Format_Results/Instance{1-4}.txt` | Route submission files (Instances 1–4 only in this directory). |
-| `Result_Graphs/ga_sol_instance{1-6}.png` | Best-found route visualizations for all 6 instances. |
-| `ga_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `avg_time_s`, `notes`. 5 seeded trials per instance showing solution variability. |
-
-#### `Results/QAOA_Results/`
-| File/Directory | Contents |
-|----------------|----------|
-| `Txt_Format_Results/Instance{1-6}.txt` | Route submission files for all 6 instances. |
-| `Result_Graphs/Instance{1-6}_Result.png` | Spatial route visualizations. |
-| `qaoa_convergence/csv/convergence_{1-6}.csv` | Per-instance COBYLA convergence traces. Columns: `circuit_evaluation`, `energy`. Tracks objective value at every estimator call across all clusters. |
-| `qaoa_convergence/plots/convergence_{1-6}.png` | Convergence curve plots showing cumulative energy vs. circuit evaluations. |
-| `qaoa_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`. The `config` field records backend, shot count, COBYLA settings, QAOA depth, and restart count. |
-
-#### `Results/DQI_Results/`
-| File/Directory | Contents |
-|----------------|----------|
-| `Txt_Format_Results/Instance{1-6}.txt` | Route submission files for all 6 instances. |
-| `Results_Graph/Instance{1-6}_Result.png` | Spatial route visualizations. |
-| `dqi_convergence/csv/convergence_{1-6}.csv` | Per-instance convergence traces tracking DQI circuit evaluations and cumulative objective energy. |
-| `dqi_convergence/plots/instance_{1-6}_convergence.png` | Convergence curve plots. |
-| `dqi_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`. Config records gamma, shot count, and qubit count. |
-
-#### `Results/QITE_Results/`
-| File/Directory | Contents |
-|----------------|----------|
-| `Txt_Format_Results/Instance{1-4}.txt` | Route submission files for Instances 1–4 only (5–6 omitted due to memory limits). |
-| `Result_Graph/Instance{1-4}_Result.png` | Spatial route visualizations for Instances 1–4. |
-| `qite_results.csv` | Columns: `instance`, `config`, `trial_1`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`, `notes`. Config records propagation parameters (`dt=10`, `steps=50`). All trials yield identical deterministic results. |
-
-#### `Results/QAOA_DQI_Convergence.png`
-Side-by-side convergence comparison plot showing QAOA and DQI objective descent across circuit evaluations. Demonstrates that DQI converges faster (fewer quantum circuit calls) while QAOA converges deeper (better final energy on larger instances when given sufficient iterations).
-
----
-
-## Pipeline Overview
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  1. LOAD              Parse instance JSON → node coordinates + demands     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  2. DECOMPOSE         Capacity-aware Agglomerative Clustering              │
-│                       ► Merge nearby nodes bottom-up                       │
-│                       ► Halt each cluster the moment demand sum → C        │
-│                       ► Inter-cluster boundary swaps to tighten edges      │
-│                       Result: CVRP → set of independent sub-TSPs           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  3. SOLVE (parallel)                                                       │
-│     ┌────────────────┬──────────────┬────────────┬──────────┬────────────┐ │
-│     │ Gurobi (MIP)   │ GA           │ QAOA       │ DQI      │ QITE       │ │
-│     │ Lazy subtour    │ Evolutionary │ COBYLA opt │ Wave-fn  │ Imaginary  │ │
-│     │ elimination     │ crossover +  │ + Aer sim  │ interf.  │ time evol. │ │
-│     │                │ mutation     │ + QPU hw   │ on class.│ statevec.  │ │
-│     └────────────────┴──────────────┴────────────┴──────────┴────────────┘ │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  4. RECONSTRUCT       Stitch sub-routes back into full CVRP solution       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  5. EVALUATE          Score total distance, export .txt routes + plots     │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Why Decompose?
-
-A direct QUBO encoding of a 25-node CVRP requires thousands of logical qubits (slack variables for capacity and subtour constraints). That far exceeds any NISQ device. By decomposing with capacity-aware clustering first, each sub-problem maps to $O(C^2)$ qubits — independent of $N$ — making real hardware execution feasible.
-
-We evaluated K-Means (capacity-blind, causes illegal routes), **Angle Sweep** (sorts customers by polar angle from the depot and greedily fills vehicles along the sweep — fast but sensitive to starting angle and blind to spatial density), and **Agglomerative Hierarchical Clustering** (deterministic, capacity-bounded bottom-up merges). Agglomerative won on every metric, and we further refine it with inter-cluster node swaps.
-
----
-
-## Results Summary
-
-Best objective values across all six instances (lower is better):
-
-| Instance | Nodes | Gurobi (Exact) | GA | QAOA | DQI | QITE |
-|----------|-------|----------------:|-------:|------:|-------:|------:|
-| 1 | 5 | **21.74** | **21.74** | **21.74** | **21.74** | **21.74** |
-| 2 | 8 | **26.18** | **26.18** | **26.18** | **26.18** | **26.18** |
-| 3 | 10 | **49.50** | **49.50** | **49.50** | **49.50** | **49.50** |
-| 4 | 15 | **58.18** | **58.18** | **58.18** | **58.18** | **58.18** |
-| 5 | 20 | **86.43** | 86.75 | 86.43 | 86.50 | — |
-| 6 | 25 | **105.61** | 111.49 | 108.83 | 106.27 | — |
-
-- Gurobi provides the provably optimal baseline on all instances.
-- DQI matches or nearly matches Gurobi across the board (best quantum-oriented result: **106.27** on Instance 6).
-- QAOA reaches **108.83** on Instance 6 with 25 qubits / 8975 gates on Aer GPU, and was also executed on live IBM `ibm_fez` and Rigetti Ankaa hardware.
-- QITE achieves exact optima on Instances 1–4 via statevector simulation; Instances 5–6 were omitted due to exponential memory scaling of the statevector backend.
-- GA converges quickly ($< 0.3$s) but diverges on larger instances without global optimality guarantees.
-
----
-
 ## Mathematical Formulation
 
 The CVRP is defined on a complete graph $G = (V, E)$ where $V = \{0, 1, \ldots, N\}$ (node $0$ is the depot). A fleet of $K$ vehicles with uniform capacity $C$ serves customer demands $q_i$. Binary decision variable $x_{ijk} = 1$ if vehicle $k$ traverses edge $(i, j)$.
@@ -171,7 +22,6 @@ $$\min \sum_{k=1}^{K} \sum_{i=0}^{N} \sum_{j=0}^{N} d_{ij}\, x_{ijk}$$
 | Capacity | $\sum_{i \in V \setminus \{0\}} q_i \sum_{j} x_{ijk} \leq C \;\; \forall k$ | No vehicle exceeds capacity $C$ |
 
 ---
-
 ## Algorithms
 
 ### Gurobi Exact Solver (MIP) — `gurobi.ipynb`
@@ -230,8 +80,9 @@ After optimization, all cluster circuits are batched into a single `SamplerV2` j
 
 #### Scaling
 - **Qubits per cluster:** $n^2$ (e.g., a 5-customer cluster needs 25 qubits)
-- **Circuit depth:** $O(p \cdot n^4)$ — each QAOA layer applies $O(n^4)$ two-qubit gates from the dense Ising coupling map
+- **Circuit depth:** $O(p \cdot C^4)$ — each QAOA layer applies $O(C^4)$ two-qubit gates from the dense Ising coupling map
 - **Total qubits (after decomposition):** bounded by the largest cluster, i.e., $O(C^2)$, independent of total problem size $N$
+- **Total optimization phase:** $O\!\left(N^3 + \frac{N}{C} \cdot I \cdot S \cdot p \cdot C^4\right)$ where $I$ is COBYLA iterations, $S$ is shots, and $p$ is QAOA depth
 - **Best result:** 108.83 on Instance 6 (3.1% above Gurobi optimum)
 
 ### DQI (Decoded Quantum Interferometry) — `dqi.ipynb`
@@ -312,7 +163,59 @@ This is no longer unitary — it exponentially suppresses high-energy components
 - **Result:** Achieves the exact Gurobi optimum on Instances 1–4. Instances 5–6 are omitted because their largest clusters exceed the statevector memory ceiling.
 
 ---
+## Pipeline Overview
 
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  1. LOAD              Parse instance JSON → node coordinates + demands     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  2. DECOMPOSE         Capacity-aware Agglomerative Clustering              │
+│                       ► Merge nearby nodes bottom-up                       │
+│                       ► Halt each cluster the moment demand sum → C        │
+│                       ► Inter-cluster boundary swaps to tighten edges      │
+│                       Result: CVRP → set of independent sub-TSPs           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  3. SOLVE (parallel)                                                       │
+│     ┌────────────────┬──────────────┬────────────┬──────────┬────────────┐ │
+│     │ Gurobi (MIP)   │ GA           │ QAOA       │ DQI      │ QITE       │ │
+│     │ Lazy subtour    │ Evolutionary │ COBYLA opt │ Wave-fn  │ Imaginary  │ │
+│     │ elimination     │ crossover +  │ + Aer sim  │ interf.  │ time evol. │ │
+│     │                │ mutation     │ + QPU hw   │ on class.│ statevec.  │ │
+│     └────────────────┴──────────────┴────────────┴──────────┴────────────┘ │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  4. RECONSTRUCT       Stitch sub-routes back into full CVRP solution       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  5. EVALUATE          Score total distance, export .txt routes + plots     │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Why Decompose?
+
+A direct QUBO encoding of a 25-node CVRP requires thousands of logical qubits (slack variables for capacity and subtour constraints). That far exceeds any NISQ device. By decomposing with capacity-aware clustering first, each sub-problem maps to $O(C^2)$ qubits — independent of $N$ — making real hardware execution feasible.
+
+We evaluated K-Means (capacity-blind, causes illegal routes), **Angle Sweep** (sorts customers by polar angle from the depot and greedily fills vehicles along the sweep — fast but sensitive to starting angle and blind to spatial density), and **Agglomerative Hierarchical Clustering** (deterministic, capacity-bounded bottom-up merges). Agglomerative won on every metric, and we further refine it with inter-cluster node swaps.
+
+---
+## Results Summary
+
+Best objective values across all six instances (lower is better):
+
+| Instance | Nodes | Gurobi (Exact) | GA | QAOA | DQI | QITE |
+|----------|-------|----------------:|-------:|------:|-------:|------:|
+| 1 | 5 | **21.74** | **21.74** | **21.74** | **21.74** | **21.74** |
+| 2 | 8 | **26.18** | **26.18** | **26.18** | **26.18** | **26.18** |
+| 3 | 10 | **49.50** | **49.50** | **49.50** | **49.50** | **49.50** |
+| 4 | 15 | **58.18** | **58.18** | **58.18** | **58.18** | **58.18** |
+| 5 | 20 | **86.43** | 86.75 | 86.43 | 86.50 | — |
+| 6 | 25 | **105.61** | 111.49 | 108.83 | 106.27 | — |
+
+- Gurobi provides the provably optimal baseline on all instances.
+- DQI matches or nearly matches Gurobi across the board (best quantum-oriented result: **106.27** on Instance 6).
+- QAOA reaches **108.83** on Instance 6 with 25 qubits / 8975 gates on Aer GPU, and was also executed on live IBM `ibm_fez` and Rigetti Ankaa hardware.
+- QITE achieves exact optima on Instances 1–4 via statevector simulation; Instances 5–6 were omitted due to exponential memory scaling of the statevector backend.
+- GA converges quickly ($< 0.3$s) but diverges on larger instances without global optimality guarantees.
+
+---
 ## Benchmarking Methodology: Simulator-First, Then Hardware
 
 Every quantum algorithm in this project was **first developed and fully benchmarked on Qiskit Aer** before any hardware submission. This was a deliberate design choice, not a shortcut:
@@ -334,7 +237,6 @@ We designed the pipeline to run **both optimization and sampling** on quantum ha
 **In both cases, the full hardware-optimization code path exists and is tested** — it is gated behind a flag (`USE_AER_FOR_OPT = False` / `USE_REAL_HARDWARE = True` for optimization). Given a paid IBM Session plan or a dedicated qBraid reservation, the entire variational loop would execute on-device with no code changes.
 
 ---
-
 ## Quantum Runtime Analysis and Fault-Tolerant Outlook
 
 ### Problem-Size Independence
@@ -377,6 +279,115 @@ When fault-tolerant quantum computers with error-corrected logical qubits become
 
 Our decomposition strategy is not a workaround for limited hardware — it is a **scalable architectural pattern** that remains optimal even on fault-tolerant machines. The quantum computer solves the hard combinatorial kernel (sub-TSP ordering or subset selection) while classical preprocessing handles the tractable structural decomposition. As hardware improves, the quantum kernel executes faster and more accurately, but the $O(C^2)$ qubit ceiling and the $O(N/C)$ classical scaling remain unchanged. **This is how quantum advantage for logistics will actually be deployed.**
 
+## Setup and Reproduction
+
+```bash
+# Clone and install
+git clone <repo-url>
+cd QuantumCT-RTRC-qBraid-Challenge
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Key dependencies:** `qiskit 2.3`, `qiskit-aer`, `qiskit-ibm-runtime`, `qiskit-optimization`, `gurobipy`, `qbraid`, `azure-quantum`, `numpy`, `scipy`, `pandas`, `matplotlib`
+
+To run any algorithm, open the corresponding notebook in `Algorithms/` and execute all cells. Results are written to the matching `Results/` subdirectory.
+
+> **Note on hardware reproduction:** All quantum algorithms run fully on the Qiskit Aer simulator by default — no cloud access is needed to reproduce every result in this repo. To reproduce the hardware sampling runs, you will need:
+> - **IBM Quantum:** An IBM Quantum account and API key (`IBMQ_TOKEN`). Set `USE_REAL_HARDWARE = True` in `qaoa_ibm.ipynb`. The Open Plan provides queue-based access to `ibm_fez`; a paid plan is required for `Session`-mode iterative optimization.
+> - **qBraid:** A qBraid account with access to a supported QPU. Set `USE_REAL_HARDWARE = True` in `qaoa_qbraid.ipynb`. The `DEVICE_ID` variable controls which backend is targeted.
+> - **Gurobi:** A valid `gurobi.lic` license file (free for academics) placed in your home directory. Required only for `gurobi.ipynb`.
+
+---
+## Repository Structure — Complete File Reference
+
+### Root Directory
+
+| File | Description |
+|------|-------------|
+| `final_instances.json` | All 6 CVRP problem instances. Each entry contains `instance_id`, number of vehicles `Nv`, capacity `C`, and a list of customers with `(x, y)` coordinates and `demand` values. Node 0 is always the depot at the origin. Instances scale from 5 customers (Instance 1) to 25 customers (Instance 6). |
+| `requirements.txt` | Pinned Python dependencies for exact reproduction. Includes `qiskit==2.3.1`, `qiskit-aer==0.17.2`, `qiskit-ibm-runtime==0.46.1`, `qiskit-optimization==0.7.0`, `gurobipy==13.0.1`, `qbraid`, `azure-quantum==3.8.0`, and supporting libraries (`numpy`, `scipy`, `pandas`, `matplotlib`). |
+| `qCourier-YaleHackathon-2026.ipynb` | The original hackathon problem statement notebook provided by the organizers. Contains the challenge description, CVRP mathematical formulation, judging criteria (approximation ratio, scale, novelty, presentation quality), and submission requirements. This is **not** our code — it is the reference specification we built against. |
+| `README.md` | This file. |
+
+### `Algorithms/` — Solver Notebooks
+
+Each notebook is self-contained: load the instance JSON, run decomposition, solve, and look at results.
+
+| File | Algorithm | Backend | What It Does |
+|------|-----------|---------|-------------|
+| `gurobi.ipynb` | Gurobi MIP | Classical (Gurobi) | Solves the full CVRP exactly using Mixed-Integer Programming with lazy subtour elimination callbacks. Contains two solver variants: an eager formulation (`solve_cvrp_gurobi`) and the optimized lazy version (`solve_cvrp_gurobi_lazy`). Iterates over all 6 instances, exports route `.txt` files, route visualization `.png` plots, and a summary CSV to `Results/Gurobi_Results/`. |
+| `ga.ipynb` | Genetic Algorithm | Classical (PyGAD) | Evolutionary meta-heuristic solver using PyGAD. Configures population size (40), parent count (12), ordered crossover, 20% swap mutation, and 120 generations. Runs 5 independent trials per instance with different random seeds to capture solution variability. Exports route `.txt` files, route plots, and `ga_results.csv` with per-trial objective values. Also generates performance analysis charts comparing best vs. average distance across instances. |
+| `qaoa_ibm.ipynb` | QAOA | Aer Simulator + IBM `ibm_fez` | The primary quantum notebook. Implements the full pipeline: agglomerative clustering with inter-cluster swaps, position-formulation QUBO construction, QUBO-to-Ising conversion, `QAOAAnsatz` with linear ramp + warm-start + random restart initialization, COBYLA optimization on `AerEstimator` (CPU or GPU), batched sampling via `SamplerV2`, and bitstring decoding. Contains two execution modes controlled by `USE_REAL_HARDWARE` and `USE_AER_FOR_OPT` flags. When hardware mode is enabled, circuits are transpiled via `generate_preset_pass_manager` and submitted to IBM `ibm_fez` through a `Session`. Includes a full feasibility checker (visit-once, flow conservation, capacity, depot start/end) and exports convergence CSVs, route plots, and `qaoa_results.csv` with qubit counts, gate counts, and timing data. |
+| `qaoa_qbraid.ipynb` | QAOA | Aer Simulator + Rigetti via qBraid | Identical QAOA pipeline to `qaoa_ibm.ipynb` but re-targeted for qBraid's runtime layer. Connects to a cloud QPU via `qbraid.runtime.QbraidDevice` (configured for `DEVICE_ID = "aws:ionq:qpu:forte-1"`). Handles qBraid-specific circuit submission: strips `GlobalPhaseGate` instructions (unsupported by the transpilation bridge), resets global phase, and submits via `device.run()` with robust result extraction handling multiple count formats. Optimization runs on Aer; only sampling hits the QPU. |
+| `dqi.ipynb` | DQI | Aer Simulator | The production DQI implementation. Implements route-by-route construction: farthest-seed selection, nearest-neighbor neighborhood formation, QUBO subset encoding with Clarke-Wright savings, DQI circuit construction (Hadamard → phase oracle → Hadamard → measure), Aer-backed circuit execution, classical bitstring decoding and repair, Held-Karp exact TSP ordering, 2-opt local search, and inter-route swap refinement. Includes a benchmark section that runs 5 seeded trials across all 6 instances with configurable shots (1024–8192), exporting convergence traces, route visualizations, and `dqi_results.csv`. |
+| `qite.ipynb` | QITE | Aer Statevector | Quantum Imaginary Time Evolution solver. Implements numerical imaginary-time propagation: constructs the full Hamiltonian matrix from the Ising model, computes the matrix exponential propagator via `scipy.linalg.expm`, applies 50 timesteps of $e^{-\Delta\tau H}$ with renormalization, then loads the evolved statevector into `AerSimulator` for probability extraction and bitstring decoding. Runs Instances 1–4 only (Instances 5–6 exceed statevector memory). Includes an energy convergence tracker, scaling benchmark section, and convergence visualization utilities. |
+
+### `Results/` — Output Data
+
+Every algorithm writes to its own isolated subdirectory. Results are fully reproducible from the corresponding notebook.
+
+#### `Results/Gurobi_Results/`
+| File/Directory | Contents |
+|----------------|----------|
+| `Txt_Format_Results/Instance{1-6}.txt` | Competition submission format. Each line is a route: `r1: 0, 3, 5, 0` (depot → customers → depot). One file per instance. |
+| `Result_Graphs/Instance{1-6}_Result.png` | Spatial route visualization with colored paths per vehicle, customer node labels, and the depot marked. |
+| `gurobi_results.csv` | Columns: `instance`, `config`, `trial_1`, `avg_value`, `best_value`, `avg_time_s`, `notes`. Single trial per instance (deterministic solver). |
+
+#### `Results/GA_Results/`
+| File/Directory | Contents |
+|----------------|----------|
+| `Txt_Format_Results/Instance{1-4}.txt` | Route submission files (Instances 1–4 only in this directory). |
+| `Result_Graphs/ga_sol_instance{1-6}.png` | Best-found route visualizations for all 6 instances. |
+| `ga_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `avg_time_s`, `notes`. 5 seeded trials per instance showing solution variability. |
+
+#### `Results/QAOA_Results/`
+| File/Directory | Contents |
+|----------------|----------|
+| `Txt_Format_Results/Instance{1-6}.txt` | Route submission files for all 6 instances. |
+| `Result_Graphs/Instance{1-6}_Result.png` | Spatial route visualizations. |
+| `qaoa_convergence/csv/convergence_{1-6}.csv` | Per-instance COBYLA convergence traces. Columns: `circuit_evaluation`, `energy`. Tracks objective value at every estimator call across all clusters. |
+| `qaoa_convergence/plots/convergence_{1-6}.png` | Convergence curve plots showing cumulative energy vs. circuit evaluations. |
+| `qaoa_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`. The `config` field records backend, shot count, COBYLA settings, QAOA depth, and restart count. |
+
+#### `Results/DQI_Results/`
+| File/Directory | Contents |
+|----------------|----------|
+| `Txt_Format_Results/Instance{1-6}.txt` | Route submission files for all 6 instances. |
+| `Results_Graph/Instance{1-6}_Result.png` | Spatial route visualizations. |
+| `dqi_convergence/csv/convergence_{1-6}.csv` | Per-instance convergence traces tracking DQI circuit evaluations and cumulative objective energy. |
+| `dqi_convergence/plots/instance_{1-6}_convergence.png` | Convergence curve plots. |
+| `dqi_results.csv` | Columns: `instance`, `config`, `trial_1` through `trial_5`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`. Config records gamma, shot count, and qubit count. |
+
+#### `Results/QITE_Results/`
+| File/Directory | Contents |
+|----------------|----------|
+| `Txt_Format_Results/Instance{1-4}.txt` | Route submission files for Instances 1–4 only (5–6 omitted due to memory limits). |
+| `Result_Graph/Instance{1-4}_Result.png` | Spatial route visualizations for Instances 1–4. |
+| `qite_results.csv` | Columns: `instance`, `config`, `trial_1`, `avg_value`, `best_value`, `qubits_used`, `total_gates`, `avg_time_s`, `notes`. Config records propagation parameters (`dt=10`, `steps=50`). All trials yield identical deterministic results. |
+
+#### `Results/QAOA_DQI_Convergence.png`
+Side-by-side convergence comparison plot showing QAOA and DQI objective descent across circuit evaluations. Demonstrates that DQI converges faster (fewer quantum circuit calls) while QAOA converges deeper (better final energy on larger instances when given sufficient iterations).
+
+---
+## Problem Instances
+
+All instances are stored in `final_instances.json`. The first four were provided by the hackathon organizers; **Instances 5 and 6 were created by us** to stress-test our algorithms at larger scale and verify that the decomposition strategy holds as problem size grows.
+
+| Instance | Source | Customers | Vehicles ($K$) | Capacity ($C$) | Max Qubits (QAOA: $C^2$) | Gurobi Optimum |
+|----------|--------|----------:|----------------:|----------------:|--------------------------:|---------------:|
+| 1 | Provided | 3 | 2 | 5 | 25 | 21.74 |
+| 2 | Provided | 3 | 2 | 2 | 4 | 26.18 |
+| 3 | Provided | 6 | 3 | 2 | 4 | 49.50 |
+| 4 | Provided | 12 | 4 | 3 | 9 | 58.18 |
+| 5 | **Ours** | 20 | 5 | 4 | 16 | 86.43 |
+| 6 | **Ours** | 25 | 5 | 5 | 25 | 105.61 |
+
+Instances 1–4 test correctness at small scale where brute-force verification is possible. Instance 5 introduces 20 customers with tighter capacity constraints, forcing the decomposition into more clusters. Instance 6 is the flagship benchmark: 25 customers with 5 vehicles of capacity 5, producing clusters that max out at 25 qubits on QAOA — the largest circuit we execute on real hardware.
+
+All customer demands are unit ($q_i = 1$), so capacity $C$ directly equals the maximum customers per vehicle. Node 0 is always the depot at the origin $(0, 0)$. Customer coordinates are 2D Euclidean with distances computed as straight-line $\ell_2$ norms.
+
+---
 ---
 
 *Built for the 2026 Quantum Courier Hackathon. Thanks to RTRC, QuantumCT, and qBraid.*
