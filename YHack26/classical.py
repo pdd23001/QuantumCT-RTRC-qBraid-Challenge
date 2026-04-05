@@ -257,91 +257,115 @@ def solve_instance(name, customers, num_vehicles, capacity, time_limit=60, mip_g
 
 
 if __name__ == "__main__":
-    # Instance 1: v = 2, C = 5
-    instance_1_customers = {
-        1: (-2, 2),
-        2: (-5, 8),
-        3: (2, 3),
-    }
 
-    # Instance 2: v = 2, C = 2
-    instance_2_customers = {
-        1: (-2, 2),
-        2: (-5, 8),
-        3: (2, 3),
-    }
 
-    # Instance 3: v = 3, C = 2
-    instance_3_customers = {
-        1: (-2, 2),
-        2: (-5, 8),
-        3: (2, 3),
-        4: (5, 7),
-        5: (2, 4),
-        6: (2, -3),
-    }
+    instance_n4_customers = {
+            1: (-2, 2),
+            2: (-5, 8),
+            3: (2, 3),
+            4: (5, 7),
+            5: (2, 4),
+            6: (2, -3),
+            7: (-4, 1),
+            8: (0, 6),
+            9: (3, -2),
+            10: (-1, 5),
+            11: (6, 1),
+            12: (-3, 4),
+            13: (4, 3),
+            14: (-6, 2),
+            15: (1, 7),
+            16: (5, -1),
+            17: (-2, -4),
+            18: (3, 6),
+            19: (-5, 5),
+            20: (0, -2),
+        }
+    # # Instance 1: v = 2, C = 5
+    # instance_1_customers = {
+    #     1: (-2, 2),
+    #     2: (-5, 8),
+    #     3: (2, 3),
+    # }
 
-    # Instance 4: v = 4, C = 3
-    instance_4_customers = {
-        1: (-2, 2),
-        2: (-5, 8),
-        3: (6, 3),
-        4: (4, 4),
-        5: (3, 2),
-        6: (0, 2),
-        7: (-2, 3),
-        8: (-4, 3),
-        9: (2, 3),
-        10: (2, 7),
-        11: (-2, 5),
-        12: (-1, 4),
-    }
+    # # Instance 2: v = 2, C = 2
+    # instance_2_customers = {
+    #     1: (-2, 2),
+    #     2: (-5, 8),
+    #     3: (2, 3),
+    # }
+
+    # # Instance 3: v = 3, C = 2
+    # instance_3_customers = {
+    #     1: (-2, 2),
+    #     2: (-5, 8),
+    #     3: (2, 3),
+    #     4: (5, 7),
+    #     5: (2, 4),
+    #     6: (2, -3),
+    # }
+
+    # # Instance 4: v = 4, C = 3
+    # instance_4_customers = {
+    #     1: (-2, 2),
+    #     2: (-5, 8),
+    #     3: (6, 3),
+    #     4: (4, 4),
+    #     5: (3, 2),
+    #     6: (0, 2),
+    #     7: (-2, 3),
+    #     8: (-4, 3),
+    #     9: (2, 3),
+    #     10: (2, 7),
+    #     11: (-2, 5),
+    #     12: (-1, 4),
+    # }
 
     results = []
 
     results.append(
         solve_instance(
-            name="Instance 1",
-            customers=instance_1_customers,
-            num_vehicles=2,
-            capacity=5,
+            name="instance_1",
+            customers=instance_n4_customers,
+            num_vehicles=5,
+            capacity=4,
             time_limit=60,
             mip_gap=0.0
         )
     )
 
-    results.append(
-        solve_instance(
-            name="Instance 2",
-            customers=instance_2_customers,
-            num_vehicles=2,
-            capacity=2,
-            time_limit=60,
-            mip_gap=0.0
-        )
-    )
+    # results.append(
+    #     solve_instance(
+    #         name="Instance 2",
+    #         customers=instance_2_customers,
+    #         num_vehicles=2,
+    #         capacity=2,
+    #         time_limit=60,
+    #         mip_gap=0.0
+    #     )
+    # )
 
-    results.append(
-        solve_instance(
-            name="Instance 3",
-            customers=instance_3_customers,
-            num_vehicles=3,
-            capacity=2,
-            time_limit=60,
-            mip_gap=0.0
-        )
-    )
+    # results.append(
+    #     solve_instance(
+    #         name="Instance 3",
+    #         customers=instance_3_customers,
+    #         num_vehicles=3,
+    #         capacity=2,
+    #         time_limit=60,
+    #         mip_gap=0.0
+    #     )
+    # )
 
-    results.append(
-        solve_instance(
-            name="Instance 4",
-            customers=instance_4_customers,
-            num_vehicles=4,
-            capacity=3,
-            time_limit=60,
-            mip_gap=0.0
-        )
-    )
+    # results.append(
+    #     solve_instance(
+    #         name="Instance 4",
+    #         customers=instance_4_customers,
+    #         num_vehicles=4,
+    #         capacity=3,
+    #         time_limit=60,
+    #         mip_gap=0.0
+    #     )
+    # )
 
     print("\nSummary:")
     for r in results:
