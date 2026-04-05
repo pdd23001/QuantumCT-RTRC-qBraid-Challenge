@@ -152,3 +152,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# This script can be run from the command line as follows:
+# python txts_to_json_merge.py path/to/txt_directory -o path/to/output.json --instances path/to/instances.json
+

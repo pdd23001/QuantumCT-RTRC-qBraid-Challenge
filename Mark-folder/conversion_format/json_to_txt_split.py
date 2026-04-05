@@ -53,3 +53,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#Terminal command to run the script:
+# python json_to_txt_split.py path/to/benchmark_results.json -o path/to/output_directory
