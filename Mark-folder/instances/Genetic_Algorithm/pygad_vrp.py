@@ -389,15 +389,15 @@ def save_plot(results: List[Dict[str, Any]], output_dir: Path) -> None:
 
 def main() -> None:
     base_dir = Path(__file__).resolve().parent
-    input_path = base_dir / ".." / "setA_random_instances_grouped.json"
-    output_dir = base_dir / "outputs"
+    input_path = base_dir / ".." / "c5n25.json"
+    output_dir = base_dir / "c5n25_outputs"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     with open(input_path, "r", encoding="utf-8") as f:
         instances = json.load(f)
 
     results: List[Dict[str, Any]] = []
-
+    results.clear()
     for instance in instances:
         solver = OfficialPyGADVRP(instance)
         result = solver.solve()
@@ -410,15 +410,13 @@ def main() -> None:
             f"distance={result['distance']:.2f}, "
             f"runtime={result['runtime']:.4f}s, "
             f"valid={result['valid']}"
-        )
-
+            )
         solver.plot_routes(output_dir / "png" / f"{result['instance_id']}_routes.png")
 
-    save_plot(results, output_dir)
+        save_plot(results, output_dir)
 
 
     print(f"Saved outputs to: {output_dir}")
-
 
 if __name__ == "__main__":
     main()
