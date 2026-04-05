@@ -1,0 +1,5 @@
+instance,config,trial_1,avg_value,best_value,qubits_used,total_gates,avg_time_s,notes
+1,"Aer CPU Statevector | Matrix Exp (dt=10, steps=50)",21.74,21.74,21.74,9,0,0.34,All trials yield the identical exact deterministic result
+2,"Aer CPU Statevector | Matrix Exp (dt=10, steps=50)",26.18,26.18,26.18,4,0,0.04,All trials yield the identical exact deterministic result
+3,"Aer CPU Statevector | Matrix Exp (dt=10, steps=50)",49.50,49.50,49.50,4,0,0.14,All trials yield the identical exact deterministic result
+4,"Aer CPU Statevector | Matrix Exp (dt=10, steps=50)",58.18,58.18,58.18,9,0,0.29,All trials yield the identical exact deterministic result

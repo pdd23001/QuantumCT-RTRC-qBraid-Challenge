@@ -1,0 +1,31 @@
+Swap iter 1: clusters 0,1 improved by 0.49
+  Swap iter 1: clusters 0,2 improved by 0.57
+  Swap iter 1: clusters 1,3 improved by 2.61
+  Swap refinement done in 2 iterations
+Clusters: [[5, 6, 9], [2, 11, 8], [3, 4, 10], [7, 1, 12]]
+
+    Optimizing on Aer CPU (2 restarts)...
+      Restart 0 [Linear Ramp]: Energy =    -8.27 | Iters = 500
+      Restart 1 [Random     ]: Energy =   -51.30 | Iters = 500
+    Optimizing on Aer CPU (2 restarts)...
+      Restart 0 [Linear Ramp]: Energy =   -86.14 | Iters = 500
+      Restart 1 [Warm Start ]: Energy =   -23.83 | Iters = 74
+    Optimizing on Aer CPU (2 restarts)...
+      Restart 0 [Linear Ramp]: Energy =   -29.04 | Iters = 106
+      Restart 1 [Warm Start ]: Energy =   -45.25 | Iters = 500
+    Optimizing on Aer CPU (2 restarts)...
+      Restart 0 [Linear Ramp]: Energy =   -16.77 | Iters = 500
+      Restart 1 [Warm Start ]: Energy =    -3.82 | Iters = 500
+
+--- Sampling on ibm_fez ---
+  r1: 0, 5, 9, 6, 0  |  Distance: 9.26  |  Qubits: 9
+  r2: 0, 11, 2, 8, 0  |  Distance: 19.73  |  Qubits: 9
+  r3: 0, 10, 4, 3, 0  |  Distance: 19.83  |  Qubits: 9
+  r4: 0, 1, 7, 12, 0  |  Distance: 9.37  |  Qubits: 9
+
+========================================
+Instance 4  —  Total Distance: 58.18
+Max Qubits: 9  |  Total Gates: 1332  |  Time: 26.73s
+Backend: IBM ibm_fez
+
+
