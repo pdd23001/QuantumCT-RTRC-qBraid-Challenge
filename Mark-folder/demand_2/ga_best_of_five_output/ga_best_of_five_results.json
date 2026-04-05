@@ -1,0 +1,712 @@
+[
+  {
+    "instance_id": "instance_1",
+    "best_trial": 1,
+    "best_seed": 20262402,
+    "best_distance": 167.19791138714382,
+    "best_distance_rounded": 167,
+    "best_runtime_sec": 0.2830178719959804,
+    "best_num_routes": 7,
+    "vehicle_limit": 7,
+    "best_valid": true,
+    "plot_file": "instance_1_ga_best_trial.png",
+    "trial_results": [
+      {
+        "trial": 1,
+        "seed": 20262402,
+        "distance": 167.19791138714382,
+        "rounded_distance": 167,
+        "runtime_sec": 0.2830178719959804,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 2,
+        "seed": 20263402,
+        "distance": 179.08009636821748,
+        "rounded_distance": 179,
+        "runtime_sec": 0.2764175999982399,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 3,
+        "seed": 20264402,
+        "distance": 177.6829665388165,
+        "rounded_distance": 178,
+        "runtime_sec": 0.2801531490040361,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 4,
+        "seed": 20265402,
+        "distance": 168.0445307723993,
+        "rounded_distance": 168,
+        "runtime_sec": 0.28573125699767843,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 5,
+        "seed": 20266402,
+        "distance": 181.3528373996138,
+        "rounded_distance": 181,
+        "runtime_sec": 0.2855033790037851,
+        "num_routes": 7,
+        "valid": true
+      }
+    ],
+    "best_routes": [
+      {
+        "path": [
+          0,
+          25,
+          17,
+          1,
+          7,
+          0
+        ],
+        "load": 5,
+        "distance": 24.94043637911883
+      },
+      {
+        "path": [
+          0,
+          10,
+          11,
+          12,
+          14,
+          0
+        ],
+        "load": 4,
+        "distance": 23.029197689295053
+      },
+      {
+        "path": [
+          0,
+          8,
+          6,
+          23,
+          0
+        ],
+        "load": 4,
+        "distance": 21.32114465280323
+      },
+      {
+        "path": [
+          0,
+          9,
+          18,
+          19,
+          0
+        ],
+        "load": 5,
+        "distance": 22.96041161031627
+      },
+      {
+        "path": [
+          0,
+          13,
+          22,
+          20,
+          0
+        ],
+        "load": 5,
+        "distance": 7.404918347287666
+      },
+      {
+        "path": [
+          0,
+          21,
+          4,
+          16,
+          24,
+          0
+        ],
+        "load": 5,
+        "distance": 34.07069567565064
+      },
+      {
+        "path": [
+          0,
+          15,
+          3,
+          5,
+          2,
+          0
+        ],
+        "load": 5,
+        "distance": 33.47110703267212
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_2",
+    "best_trial": 1,
+    "best_seed": 20262403,
+    "best_distance": 185.01397295597823,
+    "best_distance_rounded": 185,
+    "best_runtime_sec": 0.2849229790008394,
+    "best_num_routes": 7,
+    "vehicle_limit": 7,
+    "best_valid": true,
+    "plot_file": "instance_2_ga_best_trial.png",
+    "trial_results": [
+      {
+        "trial": 1,
+        "seed": 20262403,
+        "distance": 185.01397295597823,
+        "rounded_distance": 185,
+        "runtime_sec": 0.2849229790008394,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 2,
+        "seed": 20263403,
+        "distance": 190.23763087274395,
+        "rounded_distance": 190,
+        "runtime_sec": 0.2851219840013073,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 3,
+        "seed": 20264403,
+        "distance": 198.0756957679789,
+        "rounded_distance": 198,
+        "runtime_sec": 0.2868808880011784,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 4,
+        "seed": 20265403,
+        "distance": 196.13521739301993,
+        "rounded_distance": 196,
+        "runtime_sec": 0.2885309830016922,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 5,
+        "seed": 20266403,
+        "distance": 189.05507047250853,
+        "rounded_distance": 189,
+        "runtime_sec": 0.27948333600215847,
+        "num_routes": 7,
+        "valid": true
+      }
+    ],
+    "best_routes": [
+      {
+        "path": [
+          0,
+          23,
+          16,
+          15,
+          0
+        ],
+        "load": 5,
+        "distance": 26.39550791069327
+      },
+      {
+        "path": [
+          0,
+          17,
+          19,
+          21,
+          0
+        ],
+        "load": 5,
+        "distance": 28.81246912568213
+      },
+      {
+        "path": [
+          0,
+          24,
+          20,
+          6,
+          1,
+          0
+        ],
+        "load": 5,
+        "distance": 21.99414753112005
+      },
+      {
+        "path": [
+          0,
+          9,
+          5,
+          3,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 25.45405853772322
+      },
+      {
+        "path": [
+          0,
+          11,
+          8,
+          7,
+          0
+        ],
+        "load": 5,
+        "distance": 22.96041161031627
+      },
+      {
+        "path": [
+          0,
+          18,
+          2,
+          10,
+          13,
+          0
+        ],
+        "load": 5,
+        "distance": 29.219730775539308
+      },
+      {
+        "path": [
+          0,
+          12,
+          14,
+          4,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 30.177647464903984
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_3",
+    "best_trial": 4,
+    "best_seed": 20265404,
+    "best_distance": 159.06819650666142,
+    "best_distance_rounded": 159,
+    "best_runtime_sec": 0.2718446920043789,
+    "best_num_routes": 7,
+    "vehicle_limit": 7,
+    "best_valid": true,
+    "plot_file": "instance_3_ga_best_trial.png",
+    "trial_results": [
+      {
+        "trial": 1,
+        "seed": 20262404,
+        "distance": 159.06819650666142,
+        "rounded_distance": 159,
+        "runtime_sec": 0.2939793500045198,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 2,
+        "seed": 20263404,
+        "distance": 159.3723103653653,
+        "rounded_distance": 159,
+        "runtime_sec": 0.2818612160044722,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 3,
+        "seed": 20264404,
+        "distance": 159.3723103653653,
+        "rounded_distance": 159,
+        "runtime_sec": 0.27191673000197625,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 4,
+        "seed": 20265404,
+        "distance": 159.06819650666142,
+        "rounded_distance": 159,
+        "runtime_sec": 0.2718446920043789,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 5,
+        "seed": 20266404,
+        "distance": 159.3723103653653,
+        "rounded_distance": 159,
+        "runtime_sec": 0.2926934290007921,
+        "num_routes": 7,
+        "valid": true
+      }
+    ],
+    "best_routes": [
+      {
+        "path": [
+          0,
+          20,
+          9,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 13.6303302643529
+      },
+      {
+        "path": [
+          0,
+          10,
+          5,
+          17,
+          6,
+          14,
+          0
+        ],
+        "load": 5,
+        "distance": 32.86163611780615
+      },
+      {
+        "path": [
+          0,
+          11,
+          13,
+          3,
+          0
+        ],
+        "load": 5,
+        "distance": 27.252873269140146
+      },
+      {
+        "path": [
+          0,
+          19,
+          18,
+          23,
+          4,
+          0
+        ],
+        "load": 4,
+        "distance": 20.576491222541474
+      },
+      {
+        "path": [
+          0,
+          24,
+          12,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 15.497365151260954
+      },
+      {
+        "path": [
+          0,
+          8,
+          1,
+          15,
+          2,
+          0
+        ],
+        "load": 5,
+        "distance": 28.323674618780988
+      },
+      {
+        "path": [
+          0,
+          16,
+          7,
+          21,
+          0
+        ],
+        "load": 4,
+        "distance": 20.925825862778797
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_4",
+    "best_trial": 3,
+    "best_seed": 20264405,
+    "best_distance": 171.0177501149784,
+    "best_distance_rounded": 171,
+    "best_runtime_sec": 0.28266167299443623,
+    "best_num_routes": 7,
+    "vehicle_limit": 7,
+    "best_valid": true,
+    "plot_file": "instance_4_ga_best_trial.png",
+    "trial_results": [
+      {
+        "trial": 1,
+        "seed": 20262405,
+        "distance": 171.6061385871687,
+        "rounded_distance": 172,
+        "runtime_sec": 0.28029020100075286,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 2,
+        "seed": 20263405,
+        "distance": 174.92806252532523,
+        "rounded_distance": 175,
+        "runtime_sec": 0.2748626160027925,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 3,
+        "seed": 20264405,
+        "distance": 171.0177501149784,
+        "rounded_distance": 171,
+        "runtime_sec": 0.28266167299443623,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 4,
+        "seed": 20265405,
+        "distance": 182.24671697360003,
+        "rounded_distance": 182,
+        "runtime_sec": 0.28915168599633034,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 5,
+        "seed": 20266405,
+        "distance": 173.33763982730892,
+        "rounded_distance": 173,
+        "runtime_sec": 0.28023887199378805,
+        "num_routes": 7,
+        "valid": true
+      }
+    ],
+    "best_routes": [
+      {
+        "path": [
+          0,
+          25,
+          16,
+          20,
+          0
+        ],
+        "load": 4,
+        "distance": 20.70549545656378
+      },
+      {
+        "path": [
+          0,
+          4,
+          8,
+          19,
+          7,
+          0
+        ],
+        "load": 5,
+        "distance": 29.073549530642797
+      },
+      {
+        "path": [
+          0,
+          15,
+          3,
+          9,
+          21,
+          0
+        ],
+        "load": 5,
+        "distance": 20.30193520063054
+      },
+      {
+        "path": [
+          0,
+          24,
+          1,
+          18,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 36.071304176182984
+      },
+      {
+        "path": [
+          0,
+          11,
+          5,
+          2,
+          12,
+          0
+        ],
+        "load": 5,
+        "distance": 19.255646399802252
+      },
+      {
+        "path": [
+          0,
+          14,
+          6,
+          10,
+          0
+        ],
+        "load": 5,
+        "distance": 15.506462630979561
+      },
+      {
+        "path": [
+          0,
+          13,
+          23,
+          17,
+          0
+        ],
+        "load": 5,
+        "distance": 30.103356720176492
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_5",
+    "best_trial": 1,
+    "best_seed": 20262406,
+    "best_distance": 164.6382767810085,
+    "best_distance_rounded": 165,
+    "best_runtime_sec": 0.2792474140005652,
+    "best_num_routes": 7,
+    "vehicle_limit": 7,
+    "best_valid": true,
+    "plot_file": "instance_5_ga_best_trial.png",
+    "trial_results": [
+      {
+        "trial": 1,
+        "seed": 20262406,
+        "distance": 164.6382767810085,
+        "rounded_distance": 165,
+        "runtime_sec": 0.2792474140005652,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 2,
+        "seed": 20263406,
+        "distance": 168.06594635560967,
+        "rounded_distance": 168,
+        "runtime_sec": 0.2918088450023788,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 3,
+        "seed": 20264406,
+        "distance": 168.84467412803167,
+        "rounded_distance": 169,
+        "runtime_sec": 0.2884651659987867,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 4,
+        "seed": 20265406,
+        "distance": 167.36096884510673,
+        "rounded_distance": 167,
+        "runtime_sec": 0.2784313550000661,
+        "num_routes": 7,
+        "valid": true
+      },
+      {
+        "trial": 5,
+        "seed": 20266406,
+        "distance": 164.6382767810085,
+        "rounded_distance": 165,
+        "runtime_sec": 0.2834626410040073,
+        "num_routes": 7,
+        "valid": true
+      }
+    ],
+    "best_routes": [
+      {
+        "path": [
+          0,
+          8,
+          1,
+          14,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 10.601814290236735
+      },
+      {
+        "path": [
+          0,
+          12,
+          22,
+          17,
+          18,
+          0
+        ],
+        "load": 5,
+        "distance": 29.323371521994492
+      },
+      {
+        "path": [
+          0,
+          7,
+          19,
+          15,
+          0
+        ],
+        "load": 5,
+        "distance": 16.29832572579834
+      },
+      {
+        "path": [
+          0,
+          24,
+          21,
+          6,
+          11,
+          3,
+          0
+        ],
+        "load": 5,
+        "distance": 29.003807152831772
+      },
+      {
+        "path": [
+          0,
+          16,
+          10,
+          9,
+          0
+        ],
+        "load": 5,
+        "distance": 27.534411213895805
+      },
+      {
+        "path": [
+          0,
+          2,
+          13,
+          5,
+          4,
+          0
+        ],
+        "load": 5,
+        "distance": 30.20006233959198
+      },
+      {
+        "path": [
+          0,
+          20,
+          23,
+          0
+        ],
+        "load": 3,
+        "distance": 21.676484536659377
+      }
+    ]
+  }
+]

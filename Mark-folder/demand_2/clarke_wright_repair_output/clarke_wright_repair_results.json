@@ -1,0 +1,472 @@
+[
+  {
+    "instance_id": "instance_1",
+    "Nv": 7,
+    "C": 5,
+    "initial_num_routes": 7,
+    "num_routes": 7,
+    "vehicle_feasible": true,
+    "capacity_feasible": true,
+    "valid": true,
+    "total_distance": 164.56603246255702,
+    "routes": [
+      {
+        "path": [
+          0,
+          7,
+          1,
+          17,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 24.940436379118825
+      },
+      {
+        "path": [
+          0,
+          2,
+          15,
+          20,
+          0
+        ],
+        "load": 5,
+        "distance": 18.837102637643028
+      },
+      {
+        "path": [
+          0,
+          11,
+          14,
+          12,
+          19,
+          3,
+          0
+        ],
+        "load": 5,
+        "distance": 31.330872627225105
+      },
+      {
+        "path": [
+          0,
+          21,
+          4,
+          16,
+          24,
+          0
+        ],
+        "load": 5,
+        "distance": 34.07069567565065
+      },
+      {
+        "path": [
+          0,
+          5,
+          9,
+          18,
+          0
+        ],
+        "load": 5,
+        "distance": 27.529149432870625
+      },
+      {
+        "path": [
+          0,
+          23,
+          6,
+          8,
+          10,
+          0
+        ],
+        "load": 5,
+        "distance": 25.0293485853026
+      },
+      {
+        "path": [
+          0,
+          13,
+          22,
+          0
+        ],
+        "load": 3,
+        "distance": 2.8284271247461903
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_2",
+    "Nv": 7,
+    "C": 5,
+    "initial_num_routes": 8,
+    "num_routes": 7,
+    "vehicle_feasible": true,
+    "capacity_feasible": true,
+    "valid": true,
+    "total_distance": 199.19368322711932,
+    "routes": [
+      {
+        "path": [
+          0,
+          14,
+          4,
+          1,
+          0
+        ],
+        "load": 5,
+        "distance": 36.02683664395686
+      },
+      {
+        "path": [
+          0,
+          8,
+          7,
+          2,
+          13,
+          0
+        ],
+        "load": 5,
+        "distance": 26.052715245175243
+      },
+      {
+        "path": [
+          0,
+          22,
+          3,
+          5,
+          9,
+          0
+        ],
+        "load": 5,
+        "distance": 25.454058537723217
+      },
+      {
+        "path": [
+          0,
+          12,
+          18,
+          24,
+          20,
+          6,
+          0
+        ],
+        "load": 5,
+        "distance": 23.384402799378826
+      },
+      {
+        "path": [
+          0,
+          25,
+          10,
+          11,
+          0
+        ],
+        "load": 5,
+        "distance": 33.06769296450976
+      },
+      {
+        "path": [
+          0,
+          15,
+          16,
+          23,
+          0
+        ],
+        "load": 5,
+        "distance": 26.39550791069327
+      },
+      {
+        "path": [
+          0,
+          17,
+          19,
+          21,
+          0
+        ],
+        "load": 5,
+        "distance": 28.81246912568213
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_3",
+    "Nv": 7,
+    "C": 5,
+    "initial_num_routes": 7,
+    "num_routes": 7,
+    "vehicle_feasible": true,
+    "capacity_feasible": true,
+    "valid": true,
+    "total_distance": 156.1659106025098,
+    "routes": [
+      {
+        "path": [
+          0,
+          1,
+          15,
+          8,
+          12,
+          0
+        ],
+        "load": 5,
+        "distance": 22.259074132967054
+      },
+      {
+        "path": [
+          0,
+          25,
+          2,
+          24,
+          0
+        ],
+        "load": 5,
+        "distance": 21.456142741394576
+      },
+      {
+        "path": [
+          0,
+          13,
+          3,
+          23,
+          18,
+          0
+        ],
+        "load": 5,
+        "distance": 28.573990413554533
+      },
+      {
+        "path": [
+          0,
+          4,
+          11,
+          0
+        ],
+        "load": 3,
+        "distance": 10.39834563766817
+      },
+      {
+        "path": [
+          0,
+          10,
+          5,
+          17,
+          6,
+          14,
+          0
+        ],
+        "load": 5,
+        "distance": 32.86163611780615
+      },
+      {
+        "path": [
+          0,
+          19,
+          21,
+          7,
+          16,
+          0
+        ],
+        "load": 5,
+        "distance": 26.986391294766428
+      },
+      {
+        "path": [
+          0,
+          22,
+          9,
+          20,
+          0
+        ],
+        "load": 5,
+        "distance": 13.6303302643529
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_4",
+    "Nv": 7,
+    "C": 5,
+    "initial_num_routes": 8,
+    "num_routes": 7,
+    "vehicle_feasible": true,
+    "capacity_feasible": true,
+    "valid": true,
+    "total_distance": 173.0719363144184,
+    "routes": [
+      {
+        "path": [
+          0,
+          2,
+          7,
+          19,
+          8,
+          0
+        ],
+        "load": 5,
+        "distance": 31.145304459366177
+      },
+      {
+        "path": [
+          0,
+          3,
+          9,
+          15,
+          0
+        ],
+        "load": 4,
+        "distance": 18.062943634291678
+      },
+      {
+        "path": [
+          0,
+          12,
+          5,
+          4,
+          6,
+          0
+        ],
+        "load": 5,
+        "distance": 19.349201554970747
+      },
+      {
+        "path": [
+          0,
+          24,
+          1,
+          10,
+          0
+        ],
+        "load": 5,
+        "distance": 28.57541278561888
+      },
+      {
+        "path": [
+          0,
+          18,
+          14,
+          21,
+          11,
+          0
+        ],
+        "load": 5,
+        "distance": 26.361729521848858
+      },
+      {
+        "path": [
+          0,
+          13,
+          23,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 25.690994840949394
+      },
+      {
+        "path": [
+          0,
+          17,
+          16,
+          20,
+          25,
+          0
+        ],
+        "load": 5,
+        "distance": 23.886349517372675
+      }
+    ]
+  },
+  {
+    "instance_id": "instance_5",
+    "Nv": 7,
+    "C": 5,
+    "initial_num_routes": 7,
+    "num_routes": 7,
+    "vehicle_feasible": true,
+    "capacity_feasible": true,
+    "valid": true,
+    "total_distance": 165.51584674724958,
+    "routes": [
+      {
+        "path": [
+          0,
+          1,
+          12,
+          14,
+          0
+        ],
+        "load": 4,
+        "distance": 12.964724878581439
+      },
+      {
+        "path": [
+          0,
+          4,
+          13,
+          5,
+          2,
+          0
+        ],
+        "load": 5,
+        "distance": 31.280425366542882
+      },
+      {
+        "path": [
+          0,
+          3,
+          11,
+          6,
+          21,
+          24,
+          0
+        ],
+        "load": 5,
+        "distance": 29.003807152831772
+      },
+      {
+        "path": [
+          0,
+          7,
+          18,
+          17,
+          22,
+          0
+        ],
+        "load": 5,
+        "distance": 30.531671197832193
+      },
+      {
+        "path": [
+          0,
+          8,
+          19,
+          15,
+          0
+        ],
+        "load": 5,
+        "distance": 12.51323307596588
+      },
+      {
+        "path": [
+          0,
+          9,
+          10,
+          16,
+          0
+        ],
+        "load": 5,
+        "distance": 27.534411213895805
+      },
+      {
+        "path": [
+          0,
+          23,
+          20,
+          25,
+          0
+        ],
+        "load": 4,
+        "distance": 21.687573861599624
+      }
+    ]
+  }
+]
