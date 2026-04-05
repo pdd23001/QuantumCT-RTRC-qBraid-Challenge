@@ -519,7 +519,7 @@ def solve_instance_spprc(instance, verbose=False):
 # BENCHMARK
 # ============================================================
 
-def run_benchmark(json_path="setA_random_instances_grouped.json", output_dir="benchmark_output_spprc"):
+def run_benchmark(json_path="setA_random_instances_grouped.json", output_dir="spprc"):
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
 
@@ -658,6 +658,7 @@ def plot_summary(results, output_dir="benchmark_output_spprc"):
 if __name__ == "__main__":
     benchmark_results = run_benchmark(
         json_path="setA_random_instances_grouped.json",
-        output_dir="benchmark_output_spprc",
+        output_dir="spprc",
     )
-    plot_summary(benchmark_results, output_dir="benchmark_output_spprc")
+    plot_summary(benchmark_results, output_dir="spprc")
+t_

@@ -489,7 +489,7 @@ def compare_instance(vrp, save_prefix=None, show_plot=True):
     plt.tight_layout()
 
     if save_prefix:
-        out = f"{save_prefix}_instance_{vrp.instance_id}_cw_vs_spprc.png"
+        out = f"CWvsSPPRC/{save_prefix}_instance_{vrp.instance_id}_cw_vs_spprc.png"
         plt.savefig(out, dpi=220, bbox_inches="tight")
         print(f"\nSaved plot: {out}")
 
@@ -545,3 +545,7 @@ if __name__ == "__main__":
             f"SPPRC-CG={r['spprc_distance']:.3f}, "
             f"Improve={r['improvement_pct']:.3f}%"
         )
+        with open(f"SPPRC/Instance_{r['instance_id']}_SPPRC_routes.txt", "w") as f:
+            for i,route in enumerate(r["spprc_routes"]):
+                route_str = " -> ".join(str(c) for c in route)
+                f.write(f"Vehicle {i + 1}: 0 -> {route_str} -> 0\n")

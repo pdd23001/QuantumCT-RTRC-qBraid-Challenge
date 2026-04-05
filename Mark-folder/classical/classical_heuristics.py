@@ -386,7 +386,7 @@ def compare_instance(vrp, make_plot=True, save_prefix=None):
 
         plt.tight_layout()
         if save_prefix:
-            plt.savefig(f"{save_prefix}_instance_{vrp.instance_id}_routes.png", dpi=200, bbox_inches="tight")
+            plt.savefig(f"CWvsExact/{save_prefix}_instance_{vrp.instance_id}_routes.png", dpi=200, bbox_inches="tight")
         plt.show()
 
     return result
@@ -455,9 +455,25 @@ def plot_summary(results, save_prefix=None):
 
     plt.tight_layout()
     if save_prefix:
-        plt.savefig(f"{save_prefix}_summary.png", dpi=200, bbox_inches="tight")
+        plt.savefig(f"CWvsExact/{save_prefix}_summary.png", dpi=200, bbox_inches="tight")
     plt.show()
 
+
+def print_results_to_txt_exact(results):
+    #Print the result of instance 1 to 4 in .txt files with the format "instance_{instance_id}.txt":
+    #Vehicle 1: 0 -> 3 -> 5 -> 0
+    #...
+    for r in results:
+        with open(f"exactBruteForce/instance_{r['instance_id']}.txt", "w") as f:
+            for i, route in enumerate(r['optimal_routes']):
+                route_str = " -> ".join(str(c) for c in route)
+                f.write(f"Vehicle {i + 1}: 0 -> {route_str} -> 0\n")
+def print_results_to_txt_CW(results):
+    for r in results:
+        with open(f"clarkeWright/instance_{r['instance_id']}.txt", "w") as f:
+            for i, route in enumerate(r['heuristic_routes']):
+                route_str = " -> ".join(str(c) for c in route)
+                f.write(f"Vehicle {i + 1}: 0 -> {route_str} -> 0\n")
 
 def print_results(results):
     print("\n" + "=" * 90)
@@ -488,13 +504,13 @@ def print_results(results):
 
 
 if __name__ == "__main__":
-    instance_files = ["instance_1.csv", "instance_2.csv", "instance_3.csv", "instance_4.csv", "synthetic_data_1.csv"]
-
+    instance_files = ["synthetic_data_1.csv"] #Add the instance files here from the list ["instance_1.csv", "instance_2.csv", "instance_3.csv", "instance_4.csv", "synthetic_data_1.csv"]
     results = []
     for filename in instance_files:
         vrp = load_instance(filename)
         result = compare_instance(vrp, make_plot=True, save_prefix="vrp")
         results.append(result)
-
+    print_results_to_txt_exact(results)
+    print_results_to_txt_CW(results)
     print_results(results)
     plot_summary(results, save_prefix="vrp")

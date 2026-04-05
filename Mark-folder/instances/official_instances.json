@@ -1,0 +1,58 @@
+[
+  {
+    "instance_id": "instance_1",
+    "Nv": 2,
+    "C": 5,
+    "customers": [
+      {"customer_id": 0, "x": 0, "y": 0, "demand": 0},
+      {"customer_id": 1, "x": -2, "y": 2, "demand": 1},
+      {"customer_id": 2, "x": -5, "y": 8, "demand": 1},
+      {"customer_id": 3, "x": 2, "y": 3, "demand": 1}
+    ]
+  },
+  {
+    "instance_id": "instance_2",
+    "Nv": 2,
+    "C": 2,
+    "customers": [
+      {"customer_id": 0, "x": 0, "y": 0, "demand": 0},
+      {"customer_id": 1, "x": -2, "y": 2, "demand": 1},
+      {"customer_id": 2, "x": -5, "y": 8, "demand": 1},
+      {"customer_id": 3, "x": 2, "y": 3, "demand": 1}
+    ]
+  },
+  {
+    "instance_id": "instance_3",
+    "Nv": 3,
+    "C": 2,
+    "customers": [
+      {"customer_id": 0, "x": 0, "y": 0, "demand": 0},
+      {"customer_id": 1, "x": -2, "y": 2, "demand": 1},
+      {"customer_id": 2, "x": -5, "y": 8, "demand": 1},
+      {"customer_id": 3, "x": 2, "y": 3, "demand": 1},
+      {"customer_id": 4, "x": 5, "y": 7, "demand": 1},
+      {"customer_id": 5, "x": 2, "y": 4, "demand": 1},
+      {"customer_id": 6, "x": 2, "y": -3, "demand": 1}
+    ]
+  },
+  {
+    "instance_id": "instance_4",
+    "Nv": 4,
+    "C": 3,
+    "customers": [
+      {"customer_id": 0, "x": 0, "y": 0, "demand": 0},
+      {"customer_id": 1, "x": -2, "y": 2, "demand": 1},
+      {"customer_id": 2, "x": -5, "y": 8, "demand": 1},
+      {"customer_id": 3, "x": 6, "y": 3, "demand": 1},
+      {"customer_id": 4, "x": 4, "y": 4, "demand": 1},
+      {"customer_id": 5, "x": 3, "y": 2, "demand": 1},
+      {"customer_id": 6, "x": 0, "y": 2, "demand": 1},
+      {"customer_id": 7, "x": -2, "y": 3, "demand": 1},
+      {"customer_id": 8, "x": -4, "y": 3, "demand": 1},
+      {"customer_id": 9, "x": 2, "y": 3, "demand": 1},
+      {"customer_id": 10, "x": 2, "y": 7, "demand": 1},
+      {"customer_id": 11, "x": -2, "y": 5, "demand": 1},
+      {"customer_id": 12, "x": -1, "y": 4, "demand": 1}
+    ]
+  }
+]
