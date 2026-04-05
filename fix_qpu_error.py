@@ -12,19 +12,20 @@ new_estimator = """def _get_estimator_and_sampler():
     print("\\n[!] Initializing ACTUAL Quantum Computer Connection...")
     
     try:
-        # User defined block
-        from qbraid_qiskit.providers import QbraidProvider
+        # Load from qBraid Core instead of the wrapper
+        from qbraid import QbraidProvider
         from qiskit.primitives import BackendEstimatorV2
         
-        provider = QbraidProvider()
-        # Ensure your qBraid environment handles the API footprint or insert it manually!
-        backend = provider.get_backend("ionq_aria_1") 
-        print(f"[+] Assigned qBraid Target QPU: {backend.name}")
+        provider = QbraidProvider(api_key="INSERT_QBRAID_API_KEY_HERE")
+        
+        # Access the physical quantum device
+        backend = provider.get_device("ionq_aria_1") 
+        print(f"[+] Assigned qBraid Target QPU: {backend.id}")
         estimator = BackendEstimatorV2(backend=backend)
         return estimator, None
         
     except ImportError:
-        raise Exception("FATAL: You cannot connect to a Quantum Computer without the SDK! Please install it via `pip install qbraid qbraid-qiskit` or execute this notebook natively inside a qBraid Lab!")
+        raise Exception("FATAL: You cannot connect to a Quantum Computer without the SDK! Please install it via `pip install qbraid` or execute this notebook natively inside a qBraid Lab!")
     except Exception as e:
         raise Exception(f"FATAL: QPU Hardware allocation rejected! Did you input your credentials? Error: {e}")
 """
@@ -44,4 +45,4 @@ for cell in nb['cells']:
 with open('notebooks/Hybrid_CVRP_Unified.ipynb', 'w') as f:
     json.dump(nb, f, indent=1)
 
-print("QPU Error boundaries strictly secured!")
+print("QPU qbraid module trace shifted to Core SDK.")
