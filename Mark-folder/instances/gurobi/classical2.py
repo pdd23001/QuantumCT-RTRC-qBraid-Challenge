@@ -367,7 +367,7 @@ def load_instances(json_path):
 
 if __name__ == "__main__":
     #json_file = "setA_random_instances.json"
-    json_file = "./setA_random_instances_grouped.json"
+    json_file = "../setA_random_instances_grouped.json"
 
     instances = load_instances(json_file)
 
