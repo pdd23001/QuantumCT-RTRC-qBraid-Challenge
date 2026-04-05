@@ -266,14 +266,35 @@ def _random_neighborhood(route, k, rng):
 # ---------------------------------------------------------------------------
 
 def _get_estimator_and_sampler():
-    """Return (estimator, sampler) using Aer if available, else statevector."""
-    if _aer_available:
-        estimator = AerEstimatorV2()
-        sampler = AerSamplerV2()
-        return estimator, sampler
-    else:
-        from qiskit.primitives import StatevectorEstimator, StatevectorSampler  # noqa
-        return StatevectorEstimator(), StatevectorSampler()
+    """
+    STRICT QUANTUM HARDWARE EXECUTION
+    No local simulators permitted. Defers to qBraid API or IBM Quantum.
+    """
+    print("\n[!] Initializing ACTUAL Quantum Computer Connection...")
+    
+    # User can place tokens here or in their environment
+    try:
+        from qbraid_qiskit.providers import QbraidProvider
+        from qiskit.primitives import BackendEstimatorV2
+        
+        provider = QbraidProvider(qbraid_api_key="INSERT_QBRAID_API_KEY_HERE")
+        # Example hardware allocation: Rigetti Aspen-M-3 or IonQ Aria
+        backend = provider.get_backend("ionq_aria_1") 
+        print(f"[+] Assigned qBraid Target QPU: {backend.name}")
+        estimator = BackendEstimatorV2(backend=backend)
+        return estimator, None
+    except ImportError:
+        pass
+        
+    try:
+        from qiskit_ibm_runtime import QiskitRuntimeService, EstimatorV2 as RuntimeEstimator
+        service = QiskitRuntimeService(channel="ibm_quantum", token="INSERT_IBM_TOKEN_HERE")
+        backend = service.least_busy(operational=True, simulator=False)
+        print(f"[+] Assigned IBM Runtime QPU: {backend.name}")
+        estimator = RuntimeEstimator(mode=backend)
+        return estimator, None
+    except ImportError:
+        raise ImportError("No Hardware SDK found. Install qbraid-sdk or qiskit-ibm-runtime.")
 
 
 def _qaoa_optimize_neighborhood(neighborhood, D, left_anchor, right_anchor,
@@ -294,13 +315,18 @@ def _qaoa_optimize_neighborhood(neighborhood, D, left_anchor, right_anchor,
     H, _offset = _qubo_to_ising(Q)
 
     ansatz = QAOAAnsatz(H, reps=reps)
-    from qiskit import transpile
-    if _aer_available:
-        from qiskit_aer import AerSimulator
-        ansatz = transpile(ansatz, backend=AerSimulator(), optimization_level=1)
-    else:
-        ansatz = transpile(ansatz, basis_gates=['rx', 'ry', 'rz', 'cx', 'u1', 'u2', 'u3', 'p', 'u'], optimization_level=1)
     estimator, sampler = _get_estimator_and_sampler()
+    
+    # When using real BackendEstimatorV2, transpilation happens internally relying on the Backend configurations,
+    # but we can also manually wrap the ansatz transpilation dynamically utilizing backend properties.
+    from qiskit import transpile
+    try:
+        backend_target = estimator.backend
+        ansatz = transpile(ansatz, backend=backend_target, optimization_level=2)
+    except AttributeError:
+        # Fallback raw transpilation if pure RuntimeEstimator obscures direct backend parameter fetching strings
+        ansatz = transpile(ansatz, basis_gates=['rx', 'ry', 'rz', 'rzz', 'cx', 'id', 'x', 'y', 'z', 'u1', 'u2', 'u3'], optimization_level=2)
+
 
     rng = np.random.default_rng(seed)
 
