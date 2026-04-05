@@ -1,0 +1,5 @@
+# For qite.ipynb (install in a venv: python -m venv .venv && .venv/bin/pip install -r requirements-qite.txt)
+qiskit>=1.0
+qiskit-algorithms>=0.3
+numpy
+scipy
