@@ -22,7 +22,7 @@ def solve_cvrp_gurobi(customers, num_vehicles, capacity, depot=(0, 0), time_limi
 
     n = len(customers)
 
-    if n > num_vehicles * capacity:
+    if n-1 > num_vehicles * capacity:
         raise ValueError(
             f"Infeasible: {n} customers > {num_vehicles} * {capacity} = {num_vehicles * capacity}."
         )
@@ -366,8 +366,8 @@ def load_instances(json_path):
 
 
 if __name__ == "__main__":
-    json_file = "setA_random_instances.json"
-    # json_file = "setA_random_instances_grouped.json"
+    #json_file = "setA_random_instances.json"
+    json_file = "./setA_random_instances_grouped.json"
 
     instances = load_instances(json_file)
 
@@ -389,8 +389,8 @@ if __name__ == "__main__":
                 num_vehicles=data["Nv"],
                 capacity=data["C"],
                 depot=data["depot"],
-                time_limit=60,
-                mip_gap=0.0,
+                time_limit=300,
+                mip_gap=0.05,
                 verbose=True
             )
         )
