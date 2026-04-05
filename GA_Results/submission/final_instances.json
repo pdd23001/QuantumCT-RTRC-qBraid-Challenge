@@ -1,0 +1,494 @@
+[
+    {
+        "instance_id": "1",
+        "Nv": 2,
+        "C": 5,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -2,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            }
+        ]
+    },
+    {
+        "instance_id": "2",
+        "Nv": 2,
+        "C": 2,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -2,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            }
+        ]
+    },
+    {
+        "instance_id": "3",
+        "Nv": 3,
+        "C": 2,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -2,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 4,
+                "x": 5,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 5,
+                "x": 2,
+                "y": 4,
+                "demand": 1
+            },
+            {
+                "customer_id": 6,
+                "x": 2,
+                "y": -3,
+                "demand": 1
+            }
+        ]
+    },
+    {
+        "instance_id": "4",
+        "Nv": 4,
+        "C": 3,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -2,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 6,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 4,
+                "x": 4,
+                "y": 4,
+                "demand": 1
+            },
+            {
+                "customer_id": 5,
+                "x": 3,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 6,
+                "x": 0,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 7,
+                "x": -2,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 8,
+                "x": -4,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 9,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 10,
+                "x": 2,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 11,
+                "x": -2,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 12,
+                "x": -1,
+                "y": 4,
+                "demand": 1
+            }
+        ]
+    },
+    {
+        "instance_id": "5",
+        "Nv": 5,
+        "C": 4,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -2,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 4,
+                "x": 5,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 5,
+                "x": 2,
+                "y": 4,
+                "demand": 1
+            },
+            {
+                "customer_id": 6,
+                "x": 2,
+                "y": -3,
+                "demand": 1
+            },
+            {
+                "customer_id": 7,
+                "x": -4,
+                "y": 1,
+                "demand": 1
+            },
+            {
+                "customer_id": 8,
+                "x": 0,
+                "y": 6,
+                "demand": 1
+            },
+            {
+                "customer_id": 9,
+                "x": 3,
+                "y": -2,
+                "demand": 1
+            },
+            {
+                "customer_id": 10,
+                "x": -1,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 11,
+                "x": 6,
+                "y": 1,
+                "demand": 1
+            },
+            {
+                "customer_id": 12,
+                "x": -3,
+                "y": 4,
+                "demand": 1
+            },
+            {
+                "customer_id": 13,
+                "x": 4,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 14,
+                "x": -6,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 15,
+                "x": 1,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 16,
+                "x": 5,
+                "y": -1,
+                "demand": 1
+            },
+            {
+                "customer_id": 17,
+                "x": -2,
+                "y": -4,
+                "demand": 1
+            },
+            {
+                "customer_id": 18,
+                "x": 3,
+                "y": 6,
+                "demand": 1
+            },
+            {
+                "customer_id": 19,
+                "x": -5,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 20,
+                "x": 0,
+                "y": -2,
+                "demand": 1
+            }
+        ]
+    },
+    {
+        "instance_id": "6",
+        "Nv": 5,
+        "C": 5,
+        "customers": [
+            {
+                "customer_id": 0,
+                "x": 0,
+                "y": 0,
+                "demand": 0
+            },
+            {
+                "customer_id": 1,
+                "x": -3,
+                "y": 4,
+                "demand": 1
+            },
+            {
+                "customer_id": 2,
+                "x": -6,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 3,
+                "x": 2,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 4,
+                "x": 5,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 5,
+                "x": 3,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 6,
+                "x": 1,
+                "y": -4,
+                "demand": 1
+            },
+            {
+                "customer_id": 7,
+                "x": -5,
+                "y": 1,
+                "demand": 1
+            },
+            {
+                "customer_id": 8,
+                "x": 0,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 9,
+                "x": 4,
+                "y": -2,
+                "demand": 1
+            },
+            {
+                "customer_id": 10,
+                "x": -1,
+                "y": 6,
+                "demand": 1
+            },
+            {
+                "customer_id": 11,
+                "x": 6,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 12,
+                "x": -4,
+                "y": 3,
+                "demand": 1
+            },
+            {
+                "customer_id": 13,
+                "x": 7,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 14,
+                "x": -7,
+                "y": 2,
+                "demand": 1
+            },
+            {
+                "customer_id": 15,
+                "x": 1,
+                "y": 9,
+                "demand": 1
+            },
+            {
+                "customer_id": 16,
+                "x": 5,
+                "y": -1,
+                "demand": 1
+            },
+            {
+                "customer_id": 17,
+                "x": -2,
+                "y": -5,
+                "demand": 1
+            },
+            {
+                "customer_id": 18,
+                "x": 3,
+                "y": 7,
+                "demand": 1
+            },
+            {
+                "customer_id": 19,
+                "x": -6,
+                "y": 5,
+                "demand": 1
+            },
+            {
+                "customer_id": 20,
+                "x": 0,
+                "y": -3,
+                "demand": 1
+            },
+            {
+                "customer_id": 21,
+                "x": 8,
+                "y": 1,
+                "demand": 1
+            },
+            {
+                "customer_id": 22,
+                "x": -2,
+                "y": 8,
+                "demand": 1
+            },
+            {
+                "customer_id": 23,
+                "x": 4,
+                "y": 0,
+                "demand": 1
+            },
+            {
+                "customer_id": 24,
+                "x": -5,
+                "y": -2,
+                "demand": 1
+            },
+            {
+                "customer_id": 25,
+                "x": 2,
+                "y": 6,
+                "demand": 1
+            }
+        ]
+    }
+]
