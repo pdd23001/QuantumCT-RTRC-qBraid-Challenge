@@ -5,10 +5,7 @@ import shutil
 
 # 1. Configuration
 results_dirs = [
-    'Results/DQI_Results',
-    'Results/Gurobi_Results',
-    'Results/QAOA_Results',
-    'Results/QITE_Results'
+    'Results/DQI_Results'
 ]
 
 routes = {

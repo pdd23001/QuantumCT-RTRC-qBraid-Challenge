@@ -1,5 +1,0 @@
-Instance name	Trial 1	Trial 2	Trial 3	Trial 4	Trial 5	Average
-instance_1   	21.74  	21.74  	21.74  	21.74  	21.74  	21.74  
-instance_2   	26.18  	26.18  	26.18  	26.18  	26.18  	26.18  
-instance_3   	49.5   	49.5   	49.5   	49.5   	49.5   	49.5   
-instance_4   	58.42  	58.42  	58.42  	58.18  	58.42  	58.37  
