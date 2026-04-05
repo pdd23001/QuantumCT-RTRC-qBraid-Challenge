@@ -202,7 +202,7 @@ def run_benchmark(json_path="setA_random_instances_grouped.json", output_dir="be
         }
         results.append(result)
 
-        image_path = output_path / f"{vrp.instance_id}_routes.png"
+        image_path = output_path / f"outputs_png/{vrp.instance_id}_routes.png"
         vrp.plot_routes(image_path)
         print(f"Saved plot: {image_path}")
 

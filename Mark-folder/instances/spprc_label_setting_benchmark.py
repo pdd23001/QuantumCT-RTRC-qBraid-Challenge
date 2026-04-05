@@ -530,7 +530,7 @@ def run_benchmark(json_path="setA_random_instances_grouped.json", output_dir="be
         vrp, routes, result = solve_instance_spprc(instance, verbose=True)
         results.append(result)
 
-        image_path = out / f"{vrp.instance_id}_routes.png"
+        image_path = out / f"outputs_png/{vrp.instance_id}_routes.png"
         vrp.plot_routes(routes, image_path, runtime_sec=result["runtime"])
         print(f"Saved route plot: {image_path}")
         print(f"  distance={result['distance']:.6f}, vehicles={result['vehicles_used']}, valid={result['valid']}")
